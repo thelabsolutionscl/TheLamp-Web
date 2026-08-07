@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Tokens ──────────────────────────────────────────────────────────────
+   Hereda la línea gráfica de thelab.solutions: mismo negro, mismas
+   tipografías, misma estructura. Cambia un solo token — el acento pasa del
+   teal #00d4cc de la marca madre al ámbar cálido #ffb454 de The Lamp.
+   El ámbar es el color de la luz que vendemos; el teal peleaba con las
+   fotos de lámparas encendidas.
+   ──────────────────────────────────────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: ui-monospace, "JetBrains Mono", monospace;
+  --font-heading: var(--font-montserrat);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #f0f0f0;
+  --card: #141414;
+  --card-foreground: #f0f0f0;
+  --popover: #141414;
+  --popover-foreground: #f0f0f0;
+  --primary: #ffb454;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f0f0f0;
+  --muted: #1a1a1a;
+  --muted-foreground: #8a8a8a;
+  --accent: #ffb454;
+  --accent-foreground: #0a0a0a;
+  --destructive: #ff4444;
+  --success: #3ddc97;
+  --border: #2a2a2a;
+  --input: #333333;
+  --ring: #ffb454;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background-color: #ffb45440;
+    color: #ffffff;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 12%);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 20%);
+  }
+  /* Los precios en CLP se leen mucho mejor con cifras de ancho fijo. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Fondo global ────────────────────────────────────────────────────────
+   Misma idea que la marca madre (grilla técnica + glows que respiran), pero
+   los glows son cálidos: leen como la luz de una lámpara encendida detrás
+   del contenido.
+   ──────────────────────────────────────────────────────────────────────── */
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(64px, 64px, 0);
+  }
+}
+@keyframes glow-breathe-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.12);
+    opacity: 0.85;
+  }
+}
+@keyframes glow-breathe-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(-5%, -6%, 0) scale(0.95);
+    opacity: 0.65;
+  }
+}
+
+/* Aparición suave de secciones al entrar en pantalla, sin JS.
+   `animation-timeline: view()` no está en todos los navegadores todavía:
+   donde no existe, el contenido simplemente se ve, que es el fallback correcto. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

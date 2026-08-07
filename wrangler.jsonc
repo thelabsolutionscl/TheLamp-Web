@@ -1,0 +1,40 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "thelamp-web",
+  "compatibility_date": "2026-06-22",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "r2_buckets": [
+    {
+      "binding": "NEXT_INC_CACHE_R2_BUCKET",
+      "bucket_name": "thelamp-web-cache"
+    }
+  ],
+  // Pedidos. Es el único estado que guarda el sitio: sin esto el webhook de Flow
+  // no sabe qué se compró y no se puede reconstruir un pedido pagado.
+  // Crear con: npx wrangler kv namespace create PEDIDOS
+  "kv_namespaces": [
+    {
+      "binding": "PEDIDOS",
+      "id": "REEMPLAZAR_CON_EL_ID_QUE_ENTREGA_WRANGLER"
+    }
+  ],
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "thelamp-web"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
