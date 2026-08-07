@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ProductImage } from "@/components/ui/product-image"
 import { clp } from "@/lib/format"
-import type { Producto } from "@/data/products"
+import type { Imagen, Producto } from "@/data/products"
 
 export function ProductCard({
   producto,
@@ -26,20 +26,27 @@ export function ProductCard({
   }
   const posicionFoto = posicionFotoPorSlug[producto.slug] ?? "object-center"
 
-  // La foto principal se fija por archivo para evitar que un cambio accidental
-  // en el orden del catálogo altere la portada de cada modelo.
-  const archivoPrincipalPorSlug: Record<string, string> = {
-    tokyo: "tokyo1.jpeg",
-    copenhagen: "Copenhagen1.jpeg",
-    zurich: "Zurich2.jpeg",
+  // Portadas fijas de Cities. Copenhagen usa explícitamente Copenhagen1;
+  // el query versionado evita que el optimizador de Next reutilice una imagen
+  // anterior para esa tarjeta.
+  const portadaPorSlug: Record<string, Imagen> = {
+    tokyo: {
+      src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg",
+      alt: "The Lamp Tokyo · iluminación ambiental",
+    },
+    copenhagen: {
+      src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg?v=2",
+      alt: "The Lamp Copenhagen · ambiente azul",
+    },
+    zurich: {
+      src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich2.jpeg",
+      alt: "The Lamp Zurich · ambiente rojo",
+    },
   }
-  const archivoPrincipal = archivoPrincipalPorSlug[producto.slug]
-  const indicePrincipal = archivoPrincipal
-    ? Math.max(
-        0,
-        producto.imagenes.findIndex((imagen) => imagen.src.endsWith(`/${archivoPrincipal}`))
-      )
-    : 0
+
+  const imagenesTarjeta = portadaPorSlug[producto.slug]
+    ? [portadaPorSlug[producto.slug]]
+    : producto.imagenes
 
   return (
     <Link
@@ -48,8 +55,8 @@ export function ProductCard({
     >
       <div className="relative aspect-[4/5] overflow-hidden">
         <ProductImage
-          imagenes={producto.imagenes}
-          indice={indicePrincipal}
+          imagenes={imagenesTarjeta}
+          indice={0}
           nombre={producto.nombre}
           coleccion={producto.coleccion}
           priority={priority}
