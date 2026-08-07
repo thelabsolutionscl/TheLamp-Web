@@ -28,19 +28,11 @@ export function Footer() {
               Lámparas de diseño con luz inteligente. Despachamos a todo Chile.
             </p>
             <div className="mt-2 flex flex-col gap-2.5">
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs text-white/60 transition-colors hover:text-white"
-              >
+              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs text-white/60 transition-colors hover:text-white">
                 <MessageCircle className="h-3.5 w-3.5" />
                 WhatsApp
               </a>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-2 text-xs text-white/60 transition-colors hover:text-white"
-              >
+              <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 text-xs text-white/60 transition-colors hover:text-white">
                 <Mail className="h-3.5 w-3.5" />
                 {site.email}
               </a>
@@ -56,24 +48,16 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">
-              Tienda
-            </p>
+            <p className="text-xs font-medium uppercase tracking-wider text-white/60">Tienda</p>
             <ul className="flex flex-col gap-2.5">
               <li>
-                <Link
-                  href="/tienda"
-                  className="text-xs text-white/55 transition-colors hover:text-white"
-                >
+                <Link href="/tienda" className="text-xs text-white/55 transition-colors hover:text-white">
                   Todas las lámparas
                 </Link>
               </li>
               {colecciones.map((c) => (
                 <li key={c.id}>
-                  <Link
-                    href={`/tienda?coleccion=${c.id}`}
-                    className="text-xs text-white/55 transition-colors hover:text-white"
-                  >
+                  <Link href={`/tienda?coleccion=${c.id}`} className="text-xs text-white/55 transition-colors hover:text-white">
                     {c.nombre}
                   </Link>
                 </li>
@@ -82,16 +66,11 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">
-              Ayuda
-            </p>
+            <p className="text-xs font-medium uppercase tracking-wider text-white/60">Ayuda</p>
             <ul className="flex flex-col gap-2.5">
               {ayuda.map((a) => (
                 <li key={a.href}>
-                  <Link
-                    href={a.href}
-                    className="text-xs text-white/55 transition-colors hover:text-white"
-                  >
+                  <Link href={a.href} className="text-xs text-white/55 transition-colors hover:text-white">
                     {a.label}
                   </Link>
                 </li>
@@ -100,27 +79,17 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">
-              Legal
-            </p>
+            <p className="text-xs font-medium uppercase tracking-wider text-white/60">Legal</p>
             <ul className="flex flex-col gap-2.5">
               {legales.map((l) => (
                 <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-xs text-white/55 transition-colors hover:text-white"
-                  >
+                  <Link href={l.href} className="text-xs text-white/55 transition-colors hover:text-white">
                     {l.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <a
-              href={site.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-white/55 transition-colors hover:text-white"
-            >
+            <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="text-xs text-white/55 transition-colors hover:text-white">
               Instagram
             </a>
           </div>
@@ -128,8 +97,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 border-t border-white/[0.06] pt-6 text-[11px] text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.nombre} · {site.empresa.razonSocial} ·
-            RUT {site.empresa.rut}
+            © {new Date().getFullYear()} {site.nombre} · {site.empresa.razonSocial} · RUT {site.empresa.rut}
           </p>
           <p>
             Una marca de{" "}
@@ -137,7 +105,7 @@ export function Footer() {
               href={site.empresa.matrizUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/55 transition-colors hover:text-[#5badde]"
+              className="text-white/55 transition-colors hover:text-[#00d4cc]"
             >
               {site.empresa.matriz}
             </a>
