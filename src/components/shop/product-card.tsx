@@ -16,10 +16,15 @@ export function ProductCard({
   const agotado = disponible <= 0
   const enOferta = producto.precioAntes && producto.precioAntes > producto.precio
 
-  // Las fotos de Cities tienen composiciones distintas. Copenhagen necesita
-  // partir desde arriba para que la base de la lámpara quede alineada con Tokyo
-  // dentro de la grilla de la tienda.
-  const posicionFoto = producto.slug === "copenhagen" ? "object-top" : "object-center"
+  // Las fotos de Cities tienen encuadres distintos. Ajustamos el punto de
+  // recorte por modelo para que las bases de las lámparas queden alineadas
+  // visualmente dentro de la grilla de la tienda.
+  const posicionFotoPorSlug: Record<string, string> = {
+    tokyo: "object-center",
+    copenhagen: "object-top",
+    zurich: "object-top",
+  }
+  const posicionFoto = posicionFotoPorSlug[producto.slug] ?? "object-center"
 
   return (
     <Link
