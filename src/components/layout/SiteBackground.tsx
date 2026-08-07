@@ -1,10 +1,6 @@
 /**
- * Fondo global: grilla técnica que deriva lento + dos glows cálidos que
- * respiran. Mismo recurso que usa thelab.solutions, con el ámbar de The Lamp:
- * leen como luz de lámpara filtrándose detrás del contenido.
- *
- * Es un Server Component puro y todo el movimiento es CSS, así que no cuesta
- * JavaScript. `prefers-reduced-motion` lo deja quieto desde globals.css.
+ * Fondo global: grilla técnica en el turquesa oficial + dos glows cálidos que
+ * representan la luz física de las lámparas.
  */
 export function SiteBackground() {
   return (
@@ -16,7 +12,7 @@ export function SiteBackground() {
         className="absolute -inset-[64px] opacity-[0.55]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(91,173,222,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(91,173,222,0.035) 1px, transparent 1px)",
+            "linear-gradient(rgba(0,212,204,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,204,0.035) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           animation: "grid-drift 24s linear infinite",
         }}
@@ -37,7 +33,6 @@ export function SiteBackground() {
           animation: "glow-breathe-b 21s ease-in-out infinite",
         }}
       />
-      {/* Viñeta: hunde los bordes para que el contenido central pese más. */}
       <div
         className="absolute inset-0"
         style={{
