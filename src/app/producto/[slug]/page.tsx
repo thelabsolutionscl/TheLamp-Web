@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Check, ChevronRight, Truck, ShieldCheck, MessageCircle } from "lucide-react"
-import { ProductImage } from "@/components/ui/product-image"
 import { ProductCard } from "@/components/shop/product-card"
+import { ProductGallery } from "@/components/shop/product-gallery"
 import { AddToCart } from "@/components/shop/add-to-cart"
 import {
   colecciones,
@@ -121,35 +121,7 @@ export default async function FichaProducto({
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           {/* ── Galería ─────────────────────────────────────────────── */}
-          <div className="flex flex-col gap-3">
-            <div className="relative aspect-square overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]">
-              <ProductImage
-                imagenes={producto.imagenes}
-                nombre={producto.nombre}
-                coleccion={producto.coleccion}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
-            </div>
-            {producto.imagenes.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
-                {producto.imagenes.slice(1, 5).map((img, i) => (
-                  <div
-                    key={img.src}
-                    className="relative aspect-square overflow-hidden rounded-lg border border-white/[0.07] bg-[#111111]"
-                  >
-                    <ProductImage
-                      imagenes={producto.imagenes}
-                      indice={i + 1}
-                      nombre={producto.nombre}
-                      coleccion={producto.coleccion}
-                      sizes="20vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductGallery imagenes={producto.imagenes} nombre={producto.nombre} />
 
           {/* ── Compra ──────────────────────────────────────────────── */}
           <div className="flex flex-col">
