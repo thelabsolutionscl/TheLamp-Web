@@ -1,32 +1,9 @@
 /**
  * CATÁLOGO DE THE LAMP
  * ────────────────────────────────────────────────────────────────────────
- * Este archivo es el catálogo completo. Para cambiar precios, stock, textos
- * o fotos se edita acá y se hace deploy — no hay panel ni base de datos que
- * administrar.
- *
- * REGLAS IMPORTANTES
- *
- * 1. `precio` va en pesos chilenos, CON IVA INCLUIDO y sin puntos ni
- *    símbolos. 89900 se muestra como $89.900. El desglose de IVA lo calcula
- *    el sitio solo.
- *
- * 2. El servidor recalcula SIEMPRE el precio desde este archivo al momento
- *    de cobrar. Nunca confía en el precio que manda el navegador. Por eso
- *    cambiar un precio acá es suficiente y es seguro.
- *
- * 3. `stock` es el stock INICIAL, nada más. Una vez publicado el producto, el
- *    stock real vive en la base de inventario (D1) y se descuenta solo cada
- *    vez que Flow confirma un pago. Cambiar este número acá NO repone stock;
- *    para eso está el comando del README ("Reponer stock"). El valor de acá
- *    solo se usa para sembrar productos nuevos.
- *
- * 4. NUNCA mencionar impresión 3D ni PLA en los textos. Lo que se vende es
- *    diseño, calidad de luz y domótica.
- *
- * 5. Las fotos van en `public/images/productos/`. Mientras `imagenes` esté
- *    vacío el sitio muestra un marcador de posición elegante, no una imagen
- *    rota.
+ * `precio` va en CLP con IVA incluido.
+ * El stock real vive en D1 después de la siembra inicial.
+ * No mencionar impresión 3D ni PLA en textos comerciales.
  */
 
 export type Coleccion = "mesa" | "colgante" | "muro" | "pie"
@@ -41,33 +18,21 @@ export const colecciones: { id: Coleccion; nombre: string; descripcion: string }
 export type Imagen = { src: string; alt: string }
 
 export type Producto = {
-  /** Va en la URL: /producto/<slug>. No cambiarlo después de publicar. */
   slug: string
   nombre: string
-  /** Una línea, aparece bajo el nombre en la ficha y en la tarjeta. */
   tagline: string
-  /** Dos o tres frases. Se usa también como meta description. */
   descripcion: string
   coleccion: Coleccion
-  /** CLP con IVA incluido. */
   precio: number
-  /** Precio anterior, solo si está en oferta real. */
   precioAntes?: number
-  /** Stock inicial. Siembra el inventario la primera vez; después manda D1. */
   stock: number
-  /** Aparece en la portada. */
   destacado?: boolean
-  /** Luz inteligente: app, Google Home y Alexa. */
   domotica: boolean
   imagenes: Imagen[]
-  /** Centímetros. Se muestran en la ficha. */
   medidas: { alto: number; ancho: number; profundidad: number }
-  /** Kilos, con embalaje. Se usa para el cálculo de despacho. */
   pesoKg: number
   colores: string[]
-  /** Bullets cortos, lo que el comprador necesita saber en 5 segundos. */
   caracteristicas: string[]
-  /** Tabla de especificaciones de la ficha. */
   especificaciones: { label: string; valor: string }[]
 }
 
@@ -84,30 +49,12 @@ export const productos: Producto[] = [
     destacado: true,
     domotica: true,
     imagenes: [
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg",
-        alt: "The Lamp Tokyo · iluminación ambiental",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo0.jpeg",
-        alt: "The Lamp Tokyo · vista de producto",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo00.jpeg",
-        alt: "The Lamp Tokyo · vista limpia",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo2.jpeg",
-        alt: "The Lamp Tokyo · escena RGB",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo3.jpeg",
-        alt: "The Lamp Tokyo · ambiente nocturno",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo4.jpeg",
-        alt: "The Lamp Tokyo · luz de color",
-      },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg", alt: "The Lamp Tokyo · iluminación ambiental" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo0.jpeg", alt: "The Lamp Tokyo · vista de producto" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo00.jpeg", alt: "The Lamp Tokyo · vista limpia" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo2.jpeg", alt: "The Lamp Tokyo · escena RGB" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo3.jpeg", alt: "The Lamp Tokyo · ambiente nocturno" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo4.jpeg", alt: "The Lamp Tokyo · luz de color" },
     ],
     medidas: { alto: 22, ancho: 17, profundidad: 17 },
     pesoKg: 0.2,
@@ -143,26 +90,52 @@ export const productos: Producto[] = [
     destacado: true,
     domotica: true,
     imagenes: [
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen0.jpeg",
-        alt: "The Lamp Copenhagen · vista de producto",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg",
-        alt: "The Lamp Copenhagen · ambiente azul",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen2.jpeg",
-        alt: "The Lamp Copenhagen · ambiente rosado",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen3.jpeg",
-        alt: "The Lamp Copenhagen · ambiente morado",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen4.jpeg",
-        alt: "The Lamp Copenhagen · ambiente rojo",
-      },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg", alt: "The Lamp Copenhagen · ambiente azul" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen0.jpeg", alt: "The Lamp Copenhagen · vista de producto" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen2.jpeg", alt: "The Lamp Copenhagen · ambiente rosado" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen3.jpeg", alt: "The Lamp Copenhagen · ambiente morado" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen4.jpeg", alt: "The Lamp Copenhagen · ambiente rojo" },
+    ],
+    medidas: { alto: 22, ancho: 17, profundidad: 17 },
+    pesoKg: 0.2,
+    colores: ["Blanco"],
+    caracteristicas: [
+      "Bombilla RGB inteligente incluida",
+      "Control desde la app The Lamp",
+      "Compatible con Alexa y Google Home",
+      "Tres tamaños disponibles: S, M y L",
+      "Fabricación bajo pedido",
+    ],
+    especificaciones: [
+      { label: "Colección", valor: "thelamp · Cities" },
+      { label: "Tamaño S", valor: "14 × 14 × 18 cm · $39.990 IVA incluido" },
+      { label: "Tamaño M", valor: "17 × 17 × 22 cm · $44.990 IVA incluido" },
+      { label: "Tamaño L", valor: "21 × 21 × 27 cm · $59.990 IVA incluido" },
+      { label: "Pack 2 × M", valor: "$80.000 IVA incluido" },
+      { label: "Iluminación", valor: "RGB inteligente" },
+      { label: "Control", valor: "App The Lamp" },
+      { label: "Asistentes", valor: "Alexa y Google Home" },
+      { label: "Peso aprox. M", valor: "200 g con soquete y bombilla" },
+    ],
+  },
+  {
+    slug: "zurich",
+    nombre: "Zurich",
+    tagline: "Geometría precisa, luz inteligente",
+    descripcion:
+      "Zurich convierte la precisión geométrica en una pieza de iluminación con carácter. Su superficie facetada crea juegos de luz y profundidad que cambian según el color elegido, mientras la iluminación RGB se controla desde la app The Lamp o mediante Alexa y Google Home.",
+    coleccion: "mesa",
+    precio: 39990,
+    stock: 99,
+    destacado: true,
+    domotica: true,
+    imagenes: [
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich2.jpeg", alt: "The Lamp Zurich · ambiente rojo" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich1.jpeg", alt: "The Lamp Zurich · ambiente azul" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich3.jpeg", alt: "The Lamp Zurich · ambiente rosado" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich4.jpeg", alt: "The Lamp Zurich · ambiente morado" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich0.jpeg", alt: "The Lamp Zurich · vista de producto" },
+      { src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich00.jpeg", alt: "The Lamp Zurich · vista limpia" },
     ],
     medidas: { alto: 22, ancho: 17, profundidad: 17 },
     pesoKg: 0.2,
