@@ -15,8 +15,11 @@
  *    de cobrar. Nunca confía en el precio que manda el navegador. Por eso
  *    cambiar un precio acá es suficiente y es seguro.
  *
- * 3. `stock` es un número. En 0 el producto aparece como "Agotado" y no se
- *    puede comprar. Hay que descontarlo a mano después de cada venta.
+ * 3. `stock` es el stock INICIAL, nada más. Una vez publicado el producto, el
+ *    stock real vive en la base de inventario (D1) y se descuenta solo cada
+ *    vez que Flow confirma un pago. Cambiar este número acá NO repone stock;
+ *    para eso está el comando del README ("Reponer stock"). El valor de acá
+ *    solo se usa para sembrar productos nuevos.
  *
  * 4. NUNCA mencionar impresión 3D ni PLA en los textos. Lo que se vende es
  *    diseño, calidad de luz y domótica.
@@ -50,7 +53,7 @@ export type Producto = {
   precio: number
   /** Precio anterior, solo si está en oferta real. */
   precioAntes?: number
-  /** Unidades disponibles. En 0 se muestra "Agotado". */
+  /** Stock inicial. Siembra el inventario la primera vez; después manda D1. */
   stock: number
   /** Aparece en la portada. */
   destacado?: boolean

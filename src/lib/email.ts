@@ -93,11 +93,19 @@ function cuerpoHtml(pedido: Pedido, paraCliente: boolean): string {
              ${site.nombre} · una marca de ${site.empresa.matriz} ·
              ${site.empresa.razonSocial}, RUT ${site.empresa.rut}
            </p>`
-        : `<p style="margin:28px 0 0;font-size:14px;color:#444">
+        : `${
+            pedido.revisar
+              ? `<p style="margin:24px 0 0;padding:12px 14px;background:#fff4e5;border-left:3px solid #c07a1e;font-size:14px;line-height:1.6;color:#7a4a00">
+                   <strong>Revisar este pedido.</strong><br>${esc(pedido.revisar)}
+                 </p>`
+              : ""
+          }
+           <p style="margin:28px 0 0;font-size:14px;color:#444">
              Correo del comprador: ${esc(pedido.cliente.email)}<br>
              RUT: ${esc(pedido.cliente.rut)}<br>
-             Medio de pago: ${esc(pedido.pago?.medio ?? "—")}
-           </p>`
+             Medio de pago: ${esc(pedido.pago?.medio ?? "—")}<br>
+             Stock descontado: ${pedido.stockDescontado ? "sí" : "NO"}
+           </p>`}
     }
   </div>`
 }
@@ -160,7 +168,9 @@ export async function enviarConfirmacion(pedido: Pedido): Promise<void> {
       from: `${site.nombre} <${remitente}>`,
       to: interno,
       replyTo: pedido.cliente.email,
-      subject: `Nuevo pedido ${pedido.numero} — ${clp(pedido.totales.total)}`,
+      subject: pedido.revisar
+        ? `⚠ REVISAR pedido ${pedido.numero} — ${clp(pedido.totales.total)}`
+        : `Nuevo pedido ${pedido.numero} — ${clp(pedido.totales.total)}`,
       html: cuerpoHtml(pedido, false),
       text: cuerpoTexto(pedido),
     })

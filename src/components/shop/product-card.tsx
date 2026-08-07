@@ -5,12 +5,15 @@ import type { Producto } from "@/data/products"
 
 export function ProductCard({
   producto,
+  /** Stock real del inventario. El del catálogo es solo el valor inicial. */
+  disponible,
   priority = false,
 }: {
   producto: Producto
+  disponible: number
   priority?: boolean
 }) {
-  const agotado = producto.stock <= 0
+  const agotado = disponible <= 0
   const enOferta = producto.precioAntes && producto.precioAntes > producto.precio
 
   return (

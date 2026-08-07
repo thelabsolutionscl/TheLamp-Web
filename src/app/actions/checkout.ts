@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { crearPago } from "@/lib/flow"
+import { stockActual } from "@/lib/inventario"
 import {
   calcularPedido,
   generarNumeroPedido,
@@ -112,8 +113,9 @@ export async function iniciarPago(
 
   const items = leerItems(texto(formData, "items", 5000))
   // Acá se ignora por completo cualquier precio del navegador: el total sale
-  // del catálogo del servidor.
-  const { lineas, totales, zona, error } = calcularPedido(items, zonaId)
+  // del catálogo del servidor y el stock, del inventario en D1.
+  const stock = await stockActual()
+  const { lineas, totales, zona, error } = calcularPedido(items, zonaId, stock)
   if (error || !zona) {
     return { estado: "error", mensaje: error ?? "No pudimos calcular el pedido." }
   }

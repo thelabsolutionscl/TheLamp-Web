@@ -14,9 +14,16 @@ import { colecciones, productosDestacados } from "@/data/products"
 import { faq } from "@/data/faq"
 import { site } from "@/data/site"
 import { clp } from "@/lib/format"
+import { stockActual } from "@/lib/inventario"
 
-export default function Home() {
+// La portada se sirve estática y se regenera cada minuto. Así carga rápido y
+// el "Agotado" nunca queda más de 60 segundos desfasado. La verdad definitiva
+// sobre el stock la tiene el checkout, que consulta el inventario en vivo.
+export const revalidate = 60
+
+export default async function Home() {
   const destacados = productosDestacados()
+  const stock = await stockActual()
 
   return (
     <>
@@ -131,7 +138,12 @@ export default function Home() {
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {destacados.map((p, i) => (
-              <ProductCard key={p.slug} producto={p} priority={i === 0} />
+              <ProductCard
+                key={p.slug}
+                producto={p}
+                disponible={stock.get(p.slug) ?? 0}
+                priority={i === 0}
+              />
             ))}
           </div>
         </div>

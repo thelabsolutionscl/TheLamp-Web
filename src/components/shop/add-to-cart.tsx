@@ -9,14 +9,21 @@ import { cn } from "@/lib/utils"
 import type { Producto } from "@/data/products"
 
 /** Selector de color y cantidad + botón de agregar, para la ficha de producto. */
-export function AddToCart({ producto }: { producto: Producto }) {
+export function AddToCart({
+  producto,
+  /** Stock real del inventario, no el valor inicial del catálogo. */
+  disponible,
+}: {
+  producto: Producto
+  disponible: number
+}) {
   const { agregar } = useCarrito()
   const [color, setColor] = useState(producto.colores[0] ?? "Único")
   const [cantidad, setCantidad] = useState(1)
   const [agregado, setAgregado] = useState(false)
 
-  const agotado = producto.stock <= 0
-  const tope = Math.min(producto.stock, 10)
+  const agotado = disponible <= 0
+  const tope = Math.min(disponible, 10)
 
   function onAgregar() {
     agregar(producto.slug, color, cantidad)
@@ -110,9 +117,9 @@ export function AddToCart({ producto }: { producto: Producto }) {
         </CtaBoton>
       </div>
 
-      {producto.stock <= 5 && (
+      {disponible <= 5 && (
         <p className="text-xs text-[#ffb454]">
-          Quedan {producto.stock} {producto.stock === 1 ? "unidad" : "unidades"}.
+          {disponible === 1 ? "Queda 1 unidad." : `Quedan ${disponible} unidades.`}
         </p>
       )}
     </div>

@@ -16,13 +16,24 @@
       "bucket_name": "thelamp-web-cache"
     }
   ],
-  // Pedidos. Es el único estado que guarda el sitio: sin esto el webhook de Flow
-  // no sabe qué se compró y no se puede reconstruir un pedido pagado.
+  // Pedidos. Sin esto el webhook de Flow no sabe qué se compró y no se puede
+  // reconstruir un pedido pagado.
   // Crear con: npx wrangler kv namespace create PEDIDOS
   "kv_namespaces": [
     {
       "binding": "PEDIDOS",
       "id": "REEMPLAZAR_CON_EL_ID_QUE_ENTREGA_WRANGLER"
+    }
+  ],
+  // Inventario. Va en D1 y no en KV porque descontar stock necesita ser
+  // atómico: un UPDATE con guarda evita vender dos veces la última unidad.
+  // La tabla se crea y se siembra sola en la primera consulta.
+  // Crear con: npx wrangler d1 create thelamp-web
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "thelamp-web",
+      "database_id": "REEMPLAZAR_CON_EL_ID_QUE_ENTREGA_WRANGLER"
     }
   ],
   "services": [

@@ -34,7 +34,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   `@opennextjs/cloudflare` (`npm run deploy`), config en `wrangler.jsonc`.
 - Pagos: Flow.cl (Webpay, tarjetas y transferencia). Firma HMAC-SHA256 con
   Web Crypto — nada de librerías de Node, el Worker corre en el edge.
-- Pedidos: Cloudflare KV (binding `PEDIDOS`). Es el único estado del sitio.
+- Pedidos: Cloudflare KV (binding `PEDIDOS`).
+- Inventario: Cloudflare D1 (binding `DB`). El stock se descuenta en el
+  webhook de pago con un UPDATE con guarda; `products.ts` solo aporta el
+  stock inicial.
 - Email transaccional: Resend.
 - Moneda: CLP sin decimales, formato $1.234.567. IVA 19% siempre explícito.
 - Fechas: DD-MM-AAAA.

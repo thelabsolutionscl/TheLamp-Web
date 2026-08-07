@@ -1,5 +1,6 @@
 import { consultarPago } from "@/lib/flow"
 import { guardarPedido, obtenerPedido } from "@/lib/orders"
+import { descontar } from "@/lib/inventario"
 import { enviarConfirmacion } from "@/lib/email"
 
 export const dynamic = "force-dynamic"
@@ -70,6 +71,23 @@ export async function POST(req: Request) {
       medio: pago.medioPago,
       fecha: pago.fechaPago,
     }
+
+    // Descuento de inventario. El pago ya está hecho, así que si el stock no
+    // alcanza NO se revierte la venta: se marca el pedido para revisión y el
+    // correo interno lo avisa. Esto solo puede pasar si dos compras del
+    // último producto se cruzaron en el mismo instante.
+    const descuento = await descontar(
+      pedido.items.map((l) => ({ slug: l.slug, cantidad: l.cantidad }))
+    )
+    if (descuento.ok) {
+      pedido.stockDescontado = true
+    } else {
+      pedido.revisar = descuento.faltantes.length
+        ? `Sin stock al confirmar el pago: ${descuento.faltantes.join(", ")}. Hay que reponer o devolver el dinero.`
+        : descuento.motivo
+      console.error(`[pago] ${pedido.numero}: ${pedido.revisar}`)
+    }
+
     await guardarPedido(pedido)
 
     // El correo va después de guardar: si Resend falla, el pedido igual quedó

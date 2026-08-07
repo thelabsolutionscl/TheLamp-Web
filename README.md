@@ -9,7 +9,8 @@ la marca madre.
 - **Stack:** Next.js 16 + React 19 + Tailwind 4, deploy en Cloudflare Workers
   vía `@opennextjs/cloudflare`.
 - **Pagos:** Flow.cl (tarjetas, Webpay y transferencia).
-- **Pedidos:** Cloudflare KV. Es el único estado que guarda el sitio.
+- **Pedidos:** Cloudflare KV.
+- **Inventario:** Cloudflare D1. El stock se descuenta solo con cada venta.
 - **Emails:** Resend.
 
 ---
@@ -36,16 +37,38 @@ Todo el catálogo está en un solo archivo: **`src/data/products.ts`**.
 3. Cambia lo que necesites:
    - `precio`: en pesos, **con IVA incluido** y sin puntos. `89900` se
      muestra como `$89.900`.
-   - `stock`: unidades disponibles. En `0` el producto aparece como
-     "Agotado" y no se puede comprar.
    - `destacado: true`: lo muestra en la portada.
+   - `stock`: **solo el stock inicial**, para productos nuevos. Ver el
+     punto 2.1: una vez publicado, el stock se maneja con otro comando.
 4. Guarda el archivo. Si tenías `npm run dev` corriendo, el cambio se ve al
    tiro en el navegador.
 5. Para que quede publicado, haz deploy (paso 6).
 
-**Importante:** el stock **no se descuenta solo** después de una venta. Hay
-que bajarlo a mano en este archivo. Es la simplificación consciente de la
-fase 1 — ver "Lo que falta" más abajo.
+### 2.1 Reponer stock
+
+El stock se descuenta **solo** cada vez que Flow confirma un pago. Ya no hay
+que editar nada a mano después de vender. Cuando llegue mercadería nueva:
+
+1. Para ver cómo está el stock hoy:
+
+   ```
+   npm run stock
+   ```
+
+2. Para dejar un producto en una cantidad determinada:
+
+   ```
+   npm run stock -- aura 20
+   ```
+
+   Deja la Aura en 20 unidades. El nombre es el `slug` que aparece en
+   `src/data/products.ts` (`aura`, `nimbo`, `halo`, `duna`, `sereno`,
+   `vertice`).
+
+3. El cambio se ve en la web dentro de un minuto. No hace falta deploy.
+
+Cambiar el número `stock` en `products.ts` **no** repone nada: ese valor solo
+se usa la primera vez, para sembrar un producto nuevo.
 
 Otros archivos de datos:
 
@@ -141,7 +164,7 @@ con su halo de luz y la leyenda "Foto próximamente".
 ### 5.3 Pasar a producción
 
 Cuando ya probaste, cambia `FLOW_ENTORNO` a `produccion` en los secrets del
-Worker (paso 6.3).
+Worker (paso 6.4).
 
 ---
 
@@ -161,13 +184,30 @@ Worker (paso 6.3).
    que copiaste, entre las comillas.
 5. Guarda el archivo.
 
-### 6.2 Crear el bucket de caché (una sola vez)
+### 6.2 Crear la base del inventario (una sola vez)
+
+1. En la Terminal escribe:
+
+   ```
+   npx wrangler d1 create thelamp-web
+   ```
+
+2. Te va a responder con un bloque que incluye un `database_id`. Cópialo.
+3. Abre `wrangler.jsonc`.
+4. Busca `"database_id": "REEMPLAZAR_CON_EL_ID_QUE_ENTREGA_WRANGLER"` y pega
+   el id que copiaste, entre las comillas.
+5. Guarda el archivo.
+
+La tabla de stock se crea y se llena sola con los valores de `products.ts`
+la primera vez que alguien entre a la tienda. No hay migración que correr.
+
+### 6.3 Crear el bucket de caché (una sola vez)
 
 ```
 npx wrangler r2 bucket create thelamp-web-cache
 ```
 
-### 6.3 Cargar las claves secretas (una sola vez)
+### 6.4 Cargar las claves secretas (una sola vez)
 
 Ejecuta estos comandos uno por uno. Cada uno te va a pedir el valor y no lo
 muestra en pantalla mientras lo escribes — es normal.
@@ -183,7 +223,7 @@ npx wrangler secret put NEXT_PUBLIC_SITE_URL
 En `FLOW_ENTORNO` escribe `produccion`. En `NEXT_PUBLIC_SITE_URL` escribe la
 dirección final del sitio, con `https://` y **sin** barra al final.
 
-### 6.4 Deploy
+### 6.5 Deploy
 
 ```
 npm run deploy
@@ -191,7 +231,7 @@ npm run deploy
 
 Termina mostrando la URL del Worker. Ábrela y revisa que la portada cargue.
 
-### 6.5 Conectar el dominio
+### 6.6 Conectar el dominio
 
 1. Entra al panel de Cloudflare y haz clic en **Workers & Pages**.
 2. Haz clic en **thelamp-web**.
@@ -219,8 +259,13 @@ Sirve para saber dónde mirar cuando algo falle:
 4. El comprador va a Flow y paga.
 5. Flow llama servidor a servidor a `/api/pago/confirmar`. Esa ruta consulta
    el estado real del pago, **compara el monto contra el pedido guardado** y
-   recién ahí lo marca como `pagado` y manda los correos.
-6. El comprador vuelve por `/api/pago/retorno`, que solo lo redirige a
+   recién ahí lo marca como `pagado`.
+6. Se descuenta el stock en D1 con un `UPDATE` que solo aplica si alcanza. Si
+   no alcanzara (dos compras del último producto en el mismo segundo), el
+   pedido queda marcado y el correo interno llega con el asunto
+   "⚠ REVISAR" para que devuelvas el dinero o repongas.
+7. Se mandan los correos: confirmación al comprador y copia interna.
+8. El comprador vuelve por `/api/pago/retorno`, que solo lo redirige a
    `/pedido/<numero>`. Esa página no cambia nada: si el webhook todavía no
    llega, muestra "estamos confirmando tu pago".
 
@@ -236,8 +281,6 @@ npx wrangler tail thelamp-web
 
 Cosas que se dejaron fuera a propósito y hay que resolver antes de escalar:
 
-- **Descuento de stock automático.** Hoy se ajusta a mano en
-  `products.ts`. Con dos o tres ventas al día es manejable; con veinte, no.
 - **Boleta electrónica del SII.** Hoy se emite aparte. El pedido ya guarda
   el RUT, así que conectarlo al emisor es directo.
 - **Panel de pedidos.** Los pedidos viven en KV y se consultan por URL o por
@@ -255,5 +298,6 @@ Cosas que se dejaron fuera a propósito y hay que resolver antes de escalar:
 | `npm run dev`    | Levanta el sitio en `localhost:3000`              |
 | `npm run build`  | Compila y avisa si hay errores                    |
 | `npm run lint`   | Revisa el código                                  |
+| `npm run stock`  | Ve o ajusta el stock (ver 2.1)                    |
 | `npm run preview`| Lo prueba tal como va a correr en Cloudflare      |
 | `npm run deploy` | Publica                                           |

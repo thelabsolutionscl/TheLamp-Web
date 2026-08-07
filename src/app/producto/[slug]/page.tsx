@@ -13,7 +13,13 @@ import {
 } from "@/data/products"
 import { site } from "@/data/site"
 import { clp, desglosarIva } from "@/lib/format"
+import { stockActual } from "@/lib/inventario"
 import { whatsappProducto } from "@/lib/whatsapp"
+
+// Igual que la portada: estática con regeneración cada minuto. La
+// disponibilidad que ve Google y la que ve el visitante quedan al día sin
+// pagar una consulta a la base en cada visita.
+export const revalidate = 60
 
 export function generateStaticParams() {
   return productos.map((p) => ({ slug: p.slug }))
@@ -41,7 +47,7 @@ export async function generateMetadata({
 
 /** Datos estructurados de producto: es lo que hace que Google muestre el
  *  precio y la disponibilidad en el resultado de búsqueda. */
-function jsonLdProducto(producto: Producto) {
+function jsonLdProducto(producto: Producto, disponible: number) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -61,7 +67,7 @@ function jsonLdProducto(producto: Producto) {
       priceCurrency: "CLP",
       price: producto.precio,
       availability:
-        producto.stock > 0
+        disponible > 0
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
       seller: { "@type": "Organization", name: site.nombre },
@@ -78,6 +84,8 @@ export default async function FichaProducto({
   const producto = obtenerProducto(slug)
   if (!producto) notFound()
 
+  const stock = await stockActual()
+  const disponible = stock.get(producto.slug) ?? 0
   const { neto, iva } = desglosarIva(producto.precio)
   const coleccion = colecciones.find((c) => c.id === producto.coleccion)
   const relacionados = productos
@@ -90,7 +98,9 @@ export default async function FichaProducto({
     <div className="px-6 py-10 lg:px-12 lg:py-14">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProducto(producto)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdProducto(producto, disponible)),
+        }}
       />
 
       <div className="mx-auto max-w-[1400px]">
@@ -176,7 +186,7 @@ export default async function FichaProducto({
             </ul>
 
             <div className="mt-8">
-              <AddToCart producto={producto} />
+              <AddToCart producto={producto} disponible={disponible} />
             </div>
 
             <div className="mt-8 flex flex-col gap-3 border-t border-white/[0.07] pt-6 text-xs text-white/50">
@@ -259,7 +269,11 @@ export default async function FichaProducto({
             <h2 className="text-xl font-bold text-white">También te puede servir</h2>
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {relacionados.map((p) => (
-                <ProductCard key={p.slug} producto={p} />
+                <ProductCard
+                  key={p.slug}
+                  producto={p}
+                  disponible={stock.get(p.slug) ?? 0}
+                />
               ))}
             </div>
           </section>

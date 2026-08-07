@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/shop/product-card"
 import { colecciones, productos, type Coleccion } from "@/data/products"
 import { site } from "@/data/site"
 import { clp } from "@/lib/format"
+import { stockActual } from "@/lib/inventario"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default async function Tienda({
   const filtro = esColeccion(coleccion) ? coleccion : undefined
   const lista = filtro ? productos.filter((p) => p.coleccion === filtro) : productos
   const activa = colecciones.find((c) => c.id === filtro)
+  const stock = await stockActual()
 
   return (
     <div className="px-6 py-14 lg:px-12 lg:py-20">
@@ -79,7 +81,12 @@ export default async function Tienda({
         {lista.length > 0 ? (
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {lista.map((p, i) => (
-              <ProductCard key={p.slug} producto={p} priority={i < 3} />
+              <ProductCard
+                key={p.slug}
+                producto={p}
+                disponible={stock.get(p.slug) ?? 0}
+                priority={i < 3}
+              />
             ))}
           </div>
         ) : (

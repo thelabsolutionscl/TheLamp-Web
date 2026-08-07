@@ -71,6 +71,10 @@ export type Pedido = {
     medio?: string
     fecha?: string
   }
+  /** true cuando el stock del pedido ya se descontó del inventario. */
+  stockDescontado?: boolean
+  /** Motivo por el que este pedido necesita que alguien lo mire a mano. */
+  revisar?: string
 }
 
 /** Lo que manda el navegador. Solo qué y cuánto: el precio se ignora. */
@@ -83,10 +87,14 @@ export type ItemPedido = { slug: string; color: string; cantidad: number }
  * puede mandar cualquier precio, así que acá no se lee ninguno. Se toma el
  * slug, se busca el producto real y se usa SU precio. Si un producto no
  * existe o está agotado, la línea se cae.
+ *
+ * `stock` viene del inventario en D1 (ver `lib/inventario.ts`), no del
+ * catálogo: el campo `stock` de `products.ts` es solo el valor inicial.
  */
 export function calcularPedido(
   items: ItemPedido[],
-  zonaId: string
+  zonaId: string,
+  stock: Map<string, number>
 ): {
   lineas: LineaPedido[]
   totales: Pedido["totales"]
@@ -113,13 +121,14 @@ export function calcularPedido(
     if (!Number.isFinite(cantidad) || cantidad < 1) {
       return { ...vacio, error: "Hay una cantidad inválida en el carrito." }
     }
-    if (producto.stock < cantidad) {
+    const disponible = stock.get(producto.slug) ?? 0
+    if (disponible < cantidad) {
       return {
         ...vacio,
         error:
-          producto.stock === 0
+          disponible === 0
             ? `${producto.nombre} se agotó mientras comprabas.`
-            : `De ${producto.nombre} quedan ${producto.stock} unidades.`,
+            : `De ${producto.nombre} ${disponible === 1 ? "queda 1 unidad" : `quedan ${disponible} unidades`}.`,
       }
     }
     // El color también se valida: no se acepta uno que no esté en el catálogo.
