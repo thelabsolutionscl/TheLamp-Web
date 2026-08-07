@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ProductImage } from "@/components/ui/product-image"
 import { clp } from "@/lib/format"
-import type { Imagen, Producto } from "@/data/products"
+import type { Producto } from "@/data/products"
 
 export function ProductCard({
   producto,
@@ -16,9 +16,7 @@ export function ProductCard({
   const agotado = disponible <= 0
   const enOferta = producto.precioAntes && producto.precioAntes > producto.precio
 
-  // Las fotos de Cities tienen encuadres distintos. Ajustamos el punto de
-  // recorte por modelo para que las bases de las lámparas queden alineadas
-  // visualmente dentro de la grilla de la tienda.
+  // Ajuste de encuadre por modelo para mantener las bases visualmente alineadas.
   const posicionFotoPorSlug: Record<string, string> = {
     tokyo: "object-center",
     copenhagen: "object-top",
@@ -26,27 +24,18 @@ export function ProductCard({
   }
   const posicionFoto = posicionFotoPorSlug[producto.slug] ?? "object-center"
 
-  // Portadas fijas de Cities. Copenhagen usa explícitamente Copenhagen1;
-  // el query versionado evita que el optimizador de Next reutilice una imagen
-  // anterior para esa tarjeta.
-  const portadaPorSlug: Record<string, Imagen> = {
-    tokyo: {
-      src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg",
-      alt: "The Lamp Tokyo · iluminación ambiental",
-    },
-    copenhagen: {
-      src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg?v=2",
-      alt: "The Lamp Copenhagen · ambiente azul",
-    },
-    zurich: {
-      src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Zurich2.jpeg",
-      alt: "The Lamp Zurich · ambiente rojo",
-    },
+  // Portadas fijas por archivo, usando siempre las imágenes reales del catálogo.
+  const archivoPrincipalPorSlug: Record<string, string> = {
+    tokyo: "tokyo1.jpeg",
+    copenhagen: "Copenhagen1.jpeg",
+    zurich: "Zurich2.jpeg",
   }
 
-  const imagenesTarjeta = portadaPorSlug[producto.slug]
-    ? [portadaPorSlug[producto.slug]]
-    : producto.imagenes
+  const archivoPrincipal = archivoPrincipalPorSlug[producto.slug]
+  const indiceEncontrado = archivoPrincipal
+    ? producto.imagenes.findIndex((imagen) => imagen.src.endsWith(`/${archivoPrincipal}`))
+    : -1
+  const indicePrincipal = indiceEncontrado >= 0 ? indiceEncontrado : 0
 
   return (
     <Link
@@ -55,8 +44,8 @@ export function ProductCard({
     >
       <div className="relative aspect-[4/5] overflow-hidden">
         <ProductImage
-          imagenes={imagenesTarjeta}
-          indice={0}
+          imagenes={producto.imagenes}
+          indice={indicePrincipal}
           nombre={producto.nombre}
           coleccion={producto.coleccion}
           priority={priority}
