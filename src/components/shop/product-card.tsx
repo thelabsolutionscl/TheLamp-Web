@@ -18,16 +18,16 @@ export function ProductCard({
 
   const esCities = ["tokyo", "copenhagen", "zurich"].includes(producto.slug)
 
-  // Las fotos de Cities tienen márgenes internos distintos. En vez de intentar
-  // compensarlos solo con object-position, desplazamos el lienzo de cada foto
-  // dentro del mismo marco. Tokyo funciona como línea de referencia.
+  // Las fotos de Cities tienen márgenes internos distintos. Tokyo funciona
+  // como referencia. Copenhagen se corrige por posición y Zurich además recibe
+  // más escala para que la lámpara ocupe visualmente un tamaño equivalente.
   const encuadreCities: Record<
     string,
     { top: string; bottom: string; translateY: string }
   > = {
     tokyo: { top: "0%", bottom: "0%", translateY: "0%" },
     copenhagen: { top: "-12%", bottom: "-12%", translateY: "10%" },
-    zurich: { top: "-9%", bottom: "-9%", translateY: "7%" },
+    zurich: { top: "-18%", bottom: "-18%", translateY: "12%" },
   }
 
   return (
