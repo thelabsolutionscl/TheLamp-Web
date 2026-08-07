@@ -28,8 +28,6 @@ export function AddToCart({
   function onAgregar() {
     agregar(producto.slug, color, cantidad)
     setAgregado(true)
-    // Se vuelve al estado normal solo: un "Agregado ✓" permanente confunde
-    // cuando el visitante quiere sumar otra unidad.
     window.setTimeout(() => setAgregado(false), 2500)
   }
 
@@ -43,7 +41,7 @@ export function AddToCart({
         </p>
         <Link
           href="/contacto"
-          className="mt-3 inline-block text-xs font-medium text-[#5badde] underline underline-offset-4 hover:text-[#82c4e9]"
+          className="mt-3 inline-block text-xs font-medium text-[#00d4cc] underline underline-offset-4 hover:text-[#27e3dc]"
         >
           Avísenme cuando llegue
         </Link>
@@ -68,7 +66,7 @@ export function AddToCart({
                 className={cn(
                   "rounded-lg border px-3.5 py-2 text-xs transition-all",
                   color === c
-                    ? "border-[#5badde] bg-[#5badde]/10 text-white"
+                    ? "border-[#00d4cc] bg-[#00d4cc]/10 text-white"
                     : "border-white/[0.12] text-white/60 hover:border-white/25 hover:text-white"
                 )}
               >
