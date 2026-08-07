@@ -16,6 +16,11 @@ export function ProductCard({
   const agotado = disponible <= 0
   const enOferta = producto.precioAntes && producto.precioAntes > producto.precio
 
+  // Las fotos de Cities tienen composiciones distintas. Copenhagen necesita
+  // partir desde arriba para que la base de la lámpara quede alineada con Tokyo
+  // dentro de la grilla de la tienda.
+  const posicionFoto = producto.slug === "copenhagen" ? "object-top" : "object-center"
+
   return (
     <Link
       href={`/producto/${producto.slug}`}
@@ -28,7 +33,7 @@ export function ProductCard({
           coleccion={producto.coleccion}
           priority={priority}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+          className={`${posicionFoto} transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100`}
         />
         {agotado && (
           <span className="absolute left-3 top-3 rounded-full bg-black/75 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white/70 backdrop-blur-sm">
