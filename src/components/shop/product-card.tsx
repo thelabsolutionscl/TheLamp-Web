@@ -33,7 +33,7 @@ export function ProductCard({
   return (
     <Link
       href={`/producto/${producto.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111] transition-all duration-300 hover:-translate-y-1 hover:border-[#5badde]/25 hover:shadow-[0_20px_50px_-20px_rgba(91,173,222,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5badde]/50 motion-reduce:hover:translate-y-0"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111] transition-all duration-300 hover:-translate-y-1 hover:border-[#00d4cc]/25 hover:shadow-[0_20px_50px_-20px_rgba(0,212,204,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4cc]/50 motion-reduce:hover:translate-y-0"
     >
       <div className="relative aspect-[4/5] overflow-hidden">
         {esCities && producto.imagenes[0] ? (
@@ -69,7 +69,7 @@ export function ProductCard({
           </span>
         )}
         {!agotado && enOferta && (
-          <span className="absolute left-3 top-3 rounded-full bg-[#5badde] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#0a0a0a]">
+          <span className="absolute left-3 top-3 rounded-full bg-[#00d4cc] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#0a0a0a]">
             Oferta
           </span>
         )}
