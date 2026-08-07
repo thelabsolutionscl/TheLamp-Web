@@ -16,10 +16,13 @@ export function ProductCard({
   const agotado = disponible <= 0
   const enOferta = producto.precioAntes && producto.precioAntes > producto.precio
 
+  // Cada foto tiene una composición distinta. Ajustamos el punto vertical de
+  // recorte para que la base de Tokyo, Copenhagen y Zurich caiga en la misma
+  // línea visual dentro de la grilla de la tienda.
   const posicionFotoPorSlug: Record<string, string> = {
-    tokyo: "object-center",
-    copenhagen: "object-top",
-    zurich: "object-top",
+    tokyo: "object-[center_44%]",
+    copenhagen: "object-[center_42%]",
+    zurich: "object-[center_50%]",
   }
   const posicionFoto = posicionFotoPorSlug[producto.slug] ?? "object-center"
 
@@ -33,7 +36,7 @@ export function ProductCard({
           <img
             src="https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg"
             alt="The Lamp Copenhagen · ambiente azul"
-            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+            className="absolute inset-0 h-full w-full object-cover object-[center_42%] transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
           />
         ) : (
           <ProductImage
