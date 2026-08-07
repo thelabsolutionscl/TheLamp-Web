@@ -132,6 +132,61 @@ export const productos: Producto[] = [
     ],
   },
   {
+    slug: "copenhagen",
+    nombre: "Copenhagen",
+    tagline: "Minimalismo nórdico en luz inteligente",
+    descripcion:
+      "Copenhagen combina una silueta limpia y serena con una iluminación inteligente pensada para espacios contemporáneos. Su forma sobria la convierte en una pieza versátil para dormitorios, livings y rincones de lectura, mientras su sistema RGB permite transformar el ambiente desde la app The Lamp o mediante comandos de voz con Alexa y Google Home.",
+    coleccion: "mesa",
+    precio: 39990,
+    stock: 99,
+    destacado: true,
+    domotica: true,
+    imagenes: [
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen0.jpeg",
+        alt: "The Lamp Copenhagen · vista de producto",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg",
+        alt: "The Lamp Copenhagen · ambiente azul",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen2.jpeg",
+        alt: "The Lamp Copenhagen · ambiente rosado",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen3.jpeg",
+        alt: "The Lamp Copenhagen · ambiente morado",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen4.jpeg",
+        alt: "The Lamp Copenhagen · ambiente rojo",
+      },
+    ],
+    medidas: { alto: 22, ancho: 17, profundidad: 17 },
+    pesoKg: 0.2,
+    colores: ["Blanco"],
+    caracteristicas: [
+      "Bombilla RGB inteligente incluida",
+      "Control desde la app The Lamp",
+      "Compatible con Alexa y Google Home",
+      "Tres tamaños disponibles: S, M y L",
+      "Fabricación bajo pedido",
+    ],
+    especificaciones: [
+      { label: "Colección", valor: "thelamp · Cities" },
+      { label: "Tamaño S", valor: "14 × 14 × 18 cm · $39.990 IVA incluido" },
+      { label: "Tamaño M", valor: "17 × 17 × 22 cm · $44.990 IVA incluido" },
+      { label: "Tamaño L", valor: "21 × 21 × 27 cm · $59.990 IVA incluido" },
+      { label: "Pack 2 × M", valor: "$80.000 IVA incluido" },
+      { label: "Iluminación", valor: "RGB inteligente" },
+      { label: "Control", valor: "App The Lamp" },
+      { label: "Asistentes", valor: "Alexa y Google Home" },
+      { label: "Peso aprox. M", valor: "200 g con soquete y bombilla" },
+    ],
+  },
+  {
     slug: "aura",
     nombre: "Aura",
     tagline: "Luz difusa para el velador",
