@@ -26,6 +26,21 @@ export function ProductCard({
   }
   const posicionFoto = posicionFotoPorSlug[producto.slug] ?? "object-center"
 
+  // La foto principal se fija por archivo para evitar que un cambio accidental
+  // en el orden del catálogo altere la portada de cada modelo.
+  const archivoPrincipalPorSlug: Record<string, string> = {
+    tokyo: "tokyo1.jpeg",
+    copenhagen: "Copenhagen1.jpeg",
+    zurich: "Zurich2.jpeg",
+  }
+  const archivoPrincipal = archivoPrincipalPorSlug[producto.slug]
+  const indicePrincipal = archivoPrincipal
+    ? Math.max(
+        0,
+        producto.imagenes.findIndex((imagen) => imagen.src.endsWith(`/${archivoPrincipal}`))
+      )
+    : 0
+
   return (
     <Link
       href={`/producto/${producto.slug}`}
@@ -34,6 +49,7 @@ export function ProductCard({
       <div className="relative aspect-[4/5] overflow-hidden">
         <ProductImage
           imagenes={producto.imagenes}
+          indice={indicePrincipal}
           nombre={producto.nombre}
           coleccion={producto.coleccion}
           priority={priority}
