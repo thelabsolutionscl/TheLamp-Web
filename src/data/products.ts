@@ -83,7 +83,32 @@ export const productos: Producto[] = [
     stock: 99,
     destacado: true,
     domotica: true,
-    imagenes: [],
+    imagenes: [
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo0.jpeg",
+        alt: "The Lamp Tokyo · vista de producto",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo00.jpeg",
+        alt: "The Lamp Tokyo · vista limpia",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg",
+        alt: "The Lamp Tokyo · iluminación ambiental",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo2.jpeg",
+        alt: "The Lamp Tokyo · escena RGB",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo3.jpeg",
+        alt: "The Lamp Tokyo · ambiente nocturno",
+      },
+      {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo4.jpeg",
+        alt: "The Lamp Tokyo · luz de color",
+      },
+    ],
     medidas: { alto: 22, ancho: 17, profundidad: 17 },
     pesoKg: 0.2,
     colores: ["Blanco"],
