@@ -16,8 +16,6 @@ const enlaces = [
   { label: "Contacto", href: "/contacto" },
 ]
 
-/** Contador del carrito. Se mantiene invisible hasta hidratar para no
- *  mostrar "0" un instante cuando el visitante sí tenía cosas guardadas. */
 function BotonCarrito({ onNavigate }: { onNavigate?: () => void }) {
   const { unidades, listo } = useCarrito()
   return (
@@ -33,7 +31,7 @@ function BotonCarrito({ onNavigate }: { onNavigate?: () => void }) {
     >
       <ShoppingBag className="h-[18px] w-[18px]" />
       {listo && unidades > 0 && (
-        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#5badde] px-1 text-[10px] font-semibold tabular text-[#0a0a0a]">
+        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#00d4cc] px-1 text-[10px] font-semibold tabular text-[#0a0a0a]">
           {unidades}
         </span>
       )}
@@ -53,9 +51,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // El menú móvil se cierra en el clic del enlace (`cerrar`), no con un efecto
-  // sobre pathname: la navegación es la causa real y así no hay un render de
-  // más en cada cambio de página.
   const cerrar = () => setAbierto(false)
 
   return (
@@ -72,13 +67,9 @@ export function Navbar() {
           <Logo alto={22} />
         </Link>
 
-        <nav
-          aria-label="Navegación principal"
-          className="hidden items-center gap-1 md:flex"
-        >
+        <nav aria-label="Navegación principal" className="hidden items-center gap-1 md:flex">
           {enlaces.map((e) => {
-            const activo =
-              pathname === e.href || pathname.startsWith(`${e.href}/`)
+            const activo = pathname === e.href || pathname.startsWith(`${e.href}/`)
             return (
               <Link
                 key={e.href}
@@ -112,21 +103,14 @@ export function Navbar() {
               <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-80 max-w-[85vw] flex-col border-l border-white/[0.08] bg-[#0f0f0f] p-6 shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right">
                 <div className="flex items-center justify-between">
                   <Dialog.Title asChild>
-                    <span>
-                      <Logo alto={20} />
-                    </span>
+                    <span><Logo alto={20} /></span>
                   </Dialog.Title>
-                  <Dialog.Close
-                    className="p-2 text-white/50 transition-colors hover:text-white"
-                    aria-label="Cerrar menú"
-                  >
+                  <Dialog.Close className="p-2 text-white/50 transition-colors hover:text-white" aria-label="Cerrar menú">
                     <X className="h-5 w-5" />
                   </Dialog.Close>
                 </div>
                 <VisuallyHidden.Root>
-                  <Dialog.Description>
-                    Menú de navegación de The Lamp
-                  </Dialog.Description>
+                  <Dialog.Description>Menú de navegación de The Lamp</Dialog.Description>
                 </VisuallyHidden.Root>
 
                 <nav aria-label="Menú" className="mt-8 flex flex-col">
