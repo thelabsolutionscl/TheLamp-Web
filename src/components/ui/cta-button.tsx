@@ -4,7 +4,7 @@ import { ArrowRight, type LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const base =
-  "group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5badde]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+  "group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg font-semibold transition-all duration-200 ease-out active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4cc]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
 
 const sizes = {
   sm: "px-4 py-2 text-sm",
@@ -14,7 +14,7 @@ const sizes = {
 
 const variants = {
   primary:
-    "bg-[#5badde] text-[#0a0a0a] shadow-[0_4px_22px_-6px_rgba(91,173,222,0.55)] hover:-translate-y-0.5 hover:bg-[#82c4e9] hover:shadow-[0_14px_40px_-8px_rgba(91,173,222,0.7)]",
+    "bg-[#00d4cc] text-[#0a0a0a] shadow-[0_4px_22px_-6px_rgba(0,212,204,0.5)] hover:-translate-y-0.5 hover:bg-[#27e3dc] hover:shadow-[0_14px_40px_-8px_rgba(0,212,204,0.65)]",
   secondary:
     "border border-white/[0.14] text-white/70 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.04] hover:text-white",
   ghost: "text-white/60 hover:text-white",
