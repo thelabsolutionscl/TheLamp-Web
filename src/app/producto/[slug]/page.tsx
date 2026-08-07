@@ -16,9 +16,6 @@ import { clp, desglosarIva } from "@/lib/format"
 import { stockActual } from "@/lib/inventario"
 import { whatsappProducto } from "@/lib/whatsapp"
 
-// Igual que la portada: estática con regeneración cada minuto. La
-// disponibilidad que ve Google y la que ve el visitante quedan al día sin
-// pagar una consulta a la base en cada visita.
 export const revalidate = 60
 
 export function generateStaticParams() {
@@ -45,8 +42,6 @@ export async function generateMetadata({
   }
 }
 
-/** Datos estructurados de producto: es lo que hace que Google muestre el
- *  precio y la disponibilidad en el resultado de búsqueda. */
 function jsonLdProducto(producto: Producto, disponible: number) {
   return {
     "@context": "https://schema.org",
@@ -120,10 +115,8 @@ export default async function FichaProducto({
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          {/* ── Galería ─────────────────────────────────────────────── */}
           <ProductGallery imagenes={producto.imagenes} nombre={producto.nombre} />
 
-          {/* ── Compra ──────────────────────────────────────────────── */}
           <div className="flex flex-col">
             <h1 className="text-3xl font-bold text-white sm:text-4xl">
               {producto.nombre}
@@ -151,7 +144,7 @@ export default async function FichaProducto({
             <ul className="mt-6 flex flex-col gap-2.5">
               {producto.caracteristicas.map((c) => (
                 <li key={c} className="flex gap-2.5 text-sm text-white/60">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#5badde]" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#00d4cc]" />
                   {c}
                 </li>
               ))}
@@ -164,13 +157,11 @@ export default async function FichaProducto({
             <div className="mt-8 flex flex-col gap-3 border-t border-white/[0.07] pt-6 text-xs text-white/50">
               <span className="inline-flex items-center gap-2.5">
                 <Truck className="h-4 w-4 shrink-0 text-white/40" />
-                Despacho a todo Chile, liberado sobre{" "}
-                {clp(site.despachoGratisDesde)}
+                Despacho a todo Chile, liberado sobre {clp(site.despachoGratisDesde)}
               </span>
               <span className="inline-flex items-center gap-2.5">
                 <ShieldCheck className="h-4 w-4 shrink-0 text-white/40" />
-                {site.garantiaMeses} meses de garantía y 10 días para cambio o
-                devolución
+                {site.garantiaMeses} meses de garantía y 10 días para cambio o devolución
               </span>
               <a
                 href={whatsappProducto(producto.nombre)}
@@ -185,7 +176,6 @@ export default async function FichaProducto({
           </div>
         </div>
 
-        {/* ── Especificaciones ──────────────────────────────────────── */}
         <section className="mt-20 grid gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="text-xl font-bold text-white">Especificaciones</h2>
@@ -203,39 +193,28 @@ export default async function FichaProducto({
             <dl className="mt-5 divide-y divide-white/[0.07] border-y border-white/[0.07]">
               <div className="flex justify-between gap-6 py-3">
                 <dt className="text-sm text-white/45">Alto</dt>
-                <dd className="tabular text-sm text-white/80">
-                  {producto.medidas.alto} cm
-                </dd>
+                <dd className="tabular text-sm text-white/80">{producto.medidas.alto} cm</dd>
               </div>
               <div className="flex justify-between gap-6 py-3">
                 <dt className="text-sm text-white/45">Ancho</dt>
-                <dd className="tabular text-sm text-white/80">
-                  {producto.medidas.ancho} cm
-                </dd>
+                <dd className="tabular text-sm text-white/80">{producto.medidas.ancho} cm</dd>
               </div>
               <div className="flex justify-between gap-6 py-3">
                 <dt className="text-sm text-white/45">Profundidad</dt>
-                <dd className="tabular text-sm text-white/80">
-                  {producto.medidas.profundidad} cm
-                </dd>
+                <dd className="tabular text-sm text-white/80">{producto.medidas.profundidad} cm</dd>
               </div>
               <div className="flex justify-between gap-6 py-3">
                 <dt className="text-sm text-white/45">Peso con embalaje</dt>
-                <dd className="tabular text-sm text-white/80">
-                  {producto.pesoKg} kg
-                </dd>
+                <dd className="tabular text-sm text-white/80">{producto.pesoKg} kg</dd>
               </div>
               <div className="flex justify-between gap-6 py-3">
                 <dt className="text-sm text-white/45">Colores</dt>
-                <dd className="text-right text-sm text-white/80">
-                  {producto.colores.join(" · ")}
-                </dd>
+                <dd className="text-right text-sm text-white/80">{producto.colores.join(" · ")}</dd>
               </div>
             </dl>
           </div>
         </section>
 
-        {/* ── Relacionados ──────────────────────────────────────────── */}
         {relacionados.length > 0 && (
           <section className="mt-20">
             <h2 className="text-xl font-bold text-white">También te puede servir</h2>
