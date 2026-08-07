@@ -43,8 +43,6 @@ export default async function Tienda({
           </p>
         </header>
 
-        {/* Filtros. Son enlaces y no botones a propósito: cada colección
-            queda con URL propia, se puede compartir y Google la indexa. */}
         <nav
           aria-label="Filtrar por colección"
           className="mt-8 flex flex-wrap gap-2"
@@ -55,7 +53,7 @@ export default async function Tienda({
             className={cn(
               "rounded-full border px-4 py-2 text-xs transition-all",
               !filtro
-                ? "border-[#5badde] bg-[#5badde]/10 text-white"
+                ? "border-[#00d4cc] bg-[#00d4cc]/10 text-white"
                 : "border-white/[0.12] text-white/60 hover:border-white/25 hover:text-white"
             )}
           >
@@ -69,7 +67,7 @@ export default async function Tienda({
               className={cn(
                 "rounded-full border px-4 py-2 text-xs transition-all",
                 filtro === c.id
-                  ? "border-[#5badde] bg-[#5badde]/10 text-white"
+                  ? "border-[#00d4cc] bg-[#00d4cc]/10 text-white"
                   : "border-white/[0.12] text-white/60 hover:border-white/25 hover:text-white"
               )}
             >
@@ -94,7 +92,7 @@ export default async function Tienda({
             Todavía no hay modelos en esta colección.{" "}
             <Link
               href="/tienda"
-              className="text-[#5badde] underline underline-offset-4"
+              className="text-[#00d4cc] underline underline-offset-4"
             >
               Ver todas las lámparas
             </Link>
