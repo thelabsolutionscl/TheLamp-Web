@@ -27,7 +27,18 @@ export function ProductImage({
   sizes?: string
   priority?: boolean
 }) {
-  const imagen = imagenes[indice]
+  // Copenhagen usa la foto 1 como principal. Intercambiamos 0 y 1 para que
+  // también la galería mantenga un orden coherente sin duplicar imágenes.
+  const indiceReal =
+    nombre === "Copenhagen"
+      ? indice === 0
+        ? 1
+        : indice === 1
+          ? 0
+          : indice
+      : indice
+
+  const imagen = imagenes[indiceReal]
 
   if (imagen) {
     return (
