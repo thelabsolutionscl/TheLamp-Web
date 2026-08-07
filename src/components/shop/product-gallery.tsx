@@ -89,7 +89,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                   e.stopPropagation()
                   anterior()
                 }}
-                className="absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/55 p-2.5 text-white/80 backdrop-blur-sm transition hover:bg-black/80 hover:text-white"
+                className="absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/55 p-2.5 text-white/80 backdrop-blur-sm transition hover:border-[#00d4cc]/40 hover:bg-black/80 hover:text-white"
                 aria-label="Foto anterior"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -100,7 +100,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                   e.stopPropagation()
                   siguiente()
                 }}
-                className="absolute right-3 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/55 p-2.5 text-white/80 backdrop-blur-sm transition hover:bg-black/80 hover:text-white"
+                className="absolute right-3 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/55 p-2.5 text-white/80 backdrop-blur-sm transition hover:border-[#00d4cc]/40 hover:bg-black/80 hover:text-white"
                 aria-label="Foto siguiente"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -123,7 +123,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                   onClick={() => irA(i)}
                   className={`relative aspect-square w-[112px] shrink-0 snap-start overflow-hidden rounded-lg border bg-[#111111] transition-all duration-200 sm:w-[126px] ${
                     i === indice
-                      ? "border-[#5badde]/70 ring-1 ring-[#5badde]/30"
+                      ? "border-[#00d4cc]/70 ring-1 ring-[#00d4cc]/30"
                       : "border-white/[0.07] hover:border-white/25"
                   }`}
                   aria-label={`Ver foto ${i + 1} de ${nombre}`}
@@ -151,7 +151,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
           <button
             type="button"
             onClick={() => setAbierto(false)}
-            className="absolute right-4 top-4 z-[110] rounded-full border border-white/10 bg-black/60 p-2.5 text-white/80 transition hover:bg-white/10 hover:text-white sm:right-6 sm:top-6"
+            className="absolute right-4 top-4 z-[110] rounded-full border border-white/10 bg-black/60 p-2.5 text-white/80 transition hover:border-[#00d4cc]/40 hover:bg-white/10 hover:text-white sm:right-6 sm:top-6"
             aria-label="Cerrar galería"
           >
             <X className="h-5 w-5" />
@@ -165,7 +165,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                 setZoom((z) => Math.max(1, z - 0.5))
               }}
               disabled={zoom <= 1}
-              className="rounded-full p-2 text-white/70 transition hover:bg-white/10 hover:text-white disabled:opacity-30"
+              className="rounded-full p-2 text-white/70 transition hover:bg-white/10 hover:text-[#00d4cc] disabled:opacity-30"
               aria-label="Alejar"
             >
               <Minus className="h-4 w-4" />
@@ -180,7 +180,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                 setZoom((z) => Math.min(3, z + 0.5))
               }}
               disabled={zoom >= 3}
-              className="rounded-full p-2 text-white/70 transition hover:bg-white/10 hover:text-white disabled:opacity-30"
+              className="rounded-full p-2 text-white/70 transition hover:bg-white/10 hover:text-[#00d4cc] disabled:opacity-30"
               aria-label="Acercar"
             >
               <Plus className="h-4 w-4" />
@@ -195,7 +195,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                   e.stopPropagation()
                   anterior()
                 }}
-                className="absolute left-3 top-1/2 z-[110] -translate-y-1/2 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:bg-white/10 hover:text-white sm:left-6"
+                className="absolute left-3 top-1/2 z-[110] -translate-y-1/2 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:border-[#00d4cc]/40 hover:bg-white/10 hover:text-white sm:left-6"
                 aria-label="Foto anterior"
               >
                 <ChevronLeft className="h-6 w-6" />
@@ -206,7 +206,7 @@ export function ProductGallery({ imagenes, nombre }: Props) {
                   e.stopPropagation()
                   siguiente()
                 }}
-                className="absolute right-3 top-1/2 z-[110] -translate-y-1/2 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:bg-white/10 hover:text-white sm:right-6"
+                className="absolute right-3 top-1/2 z-[110] -translate-y-1/2 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:border-[#00d4cc]/40 hover:bg-white/10 hover:text-white sm:right-6"
                 aria-label="Foto siguiente"
               >
                 <ChevronRight className="h-6 w-6" />
