@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 470" role="img" aria-labelledby="title desc">
+  <title id="title">The Lamp</title>
+  <desc id="desc">Logo blanco y celeste de The Lamp sobre fondo oscuro</desc>
+  <rect width="520" height="470" rx="10" fill="#242526"/>
+  <g fill="#fff" font-family="Arial, Helvetica, sans-serif" font-weight="900">
+    <text x="35" y="205" font-size="155" letter-spacing="-7">THE</text>
+    <text x="58" y="330" font-size="152" letter-spacing="-10">LAMP</text>
+    <text x="67" y="407" font-size="58" letter-spacing="-2">thelamp.cl</text>
+  </g>
+  <g transform="translate(300 30) rotate(7 90 90)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M93 11c-36 0-64 27-64 63 0 20-5 39-17 55-4 6-3 13 2 17l28 22c5 4 11 4 16 0 16-13 33-19 52-22 36-5 61-31 61-65 0-40-31-70-78-70Z" stroke="#fff" stroke-width="7"/>
+    <path d="M58 119 91 78" stroke="#fff" stroke-width="7"/>
+    <path d="m17 153 40 34M27 142l40 34M45 181l-11 13-40-34 11-13" stroke="#27a9cf" stroke-width="8"/>
+  </g>
+</svg>
