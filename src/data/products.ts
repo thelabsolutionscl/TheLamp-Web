@@ -85,16 +85,16 @@ export const productos: Producto[] = [
     domotica: true,
     imagenes: [
       {
+        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg",
+        alt: "The Lamp Tokyo · iluminación ambiental",
+      },
+      {
         src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo0.jpeg",
         alt: "The Lamp Tokyo · vista de producto",
       },
       {
         src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo00.jpeg",
         alt: "The Lamp Tokyo · vista limpia",
-      },
-      {
-        src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo1.jpeg",
-        alt: "The Lamp Tokyo · iluminación ambiental",
       },
       {
         src: "https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/tokyo2.jpeg",
