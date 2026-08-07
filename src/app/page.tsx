@@ -16,9 +16,6 @@ import { site } from "@/data/site"
 import { clp } from "@/lib/format"
 import { stockActual } from "@/lib/inventario"
 
-// La portada se sirve estática y se regenera cada minuto. Así carga rápido y
-// el "Agotado" nunca queda más de 60 segundos desfasado. La verdad definitiva
-// sobre el stock la tiene el checkout, que consulta el inventario en vivo.
 export const revalidate = 60
 
 export default async function Home() {
@@ -27,10 +24,7 @@ export default async function Home() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-20 pt-20 lg:px-12 lg:pb-28 lg:pt-28">
-        {/* Cono de luz: el sitio no tiene fotos todavía, así que el hero
-            construye la atmósfera con CSS en vez de dejar un hueco. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 opacity-60"
@@ -41,7 +35,7 @@ export default async function Home() {
         />
         <div className="relative mx-auto max-w-[1400px]">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#5badde]/25 bg-[#5badde]/[0.07] px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#5badde]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#00d4cc]/25 bg-[#00d4cc]/[0.07] px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#00d4cc]">
               <Sparkles className="h-3 w-3" />
               Iluminación de diseño · Chile
             </span>
@@ -68,15 +62,12 @@ export default async function Home() {
             </div>
 
             <p className="mt-7 text-xs text-white/40">
-              Despacho a todo Chile · Liberado sobre{" "}
-              {clp(site.despachoGratisDesde)} · {site.garantiaMeses} meses de
-              garantía
+              Despacho a todo Chile · Liberado sobre {clp(site.despachoGratisDesde)} · {site.garantiaMeses} meses de garantía
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Los tres argumentos ──────────────────────────────────────── */}
       <section className="reveal px-6 py-12 lg:px-12">
         <div className="mx-auto grid max-w-[1400px] gap-4 sm:grid-cols-3">
           {[
@@ -103,33 +94,26 @@ export default async function Home() {
               key={b.titulo}
               className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6"
             >
-              <b.icon className="h-5 w-5 text-[#5badde]" />
+              <b.icon className="h-5 w-5 text-[#00d4cc]" />
               <h2 className="mt-4 font-[family-name:var(--font-heading)] text-base font-semibold text-white">
                 {b.titulo}
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-white/55">
-                {b.texto}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-white/55">{b.texto}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Destacados ───────────────────────────────────────────────── */}
       <section className="reveal px-6 py-16 lg:px-12">
         <div className="mx-auto max-w-[1400px]">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                Las más pedidas
-              </h2>
-              <p className="mt-2 text-sm text-white/55">
-                Tres modelos que resuelven el 80% de las casas.
-              </p>
+              <h2 className="text-2xl font-bold text-white sm:text-3xl">Las más pedidas</h2>
+              <p className="mt-2 text-sm text-white/55">Tres modelos que resuelven el 80% de las casas.</p>
             </div>
             <Link
               href="/tienda"
-              className="group inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-[#5badde]"
+              className="group inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-[#00d4cc]"
             >
               Ver todas
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -149,24 +133,19 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── Colecciones ──────────────────────────────────────────────── */}
       <section className="reveal px-6 py-16 lg:px-12">
         <div className="mx-auto max-w-[1400px]">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
-            Según dónde la necesites
-          </h2>
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">Según dónde la necesites</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {colecciones.map((c) => (
               <Link
                 key={c.id}
                 href={`/tienda?coleccion=${c.id}`}
-                className="group rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all hover:border-[#5badde]/25 hover:bg-white/[0.04]"
+                className="group rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all hover:border-[#00d4cc]/25 hover:bg-white/[0.04]"
               >
-                <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-white">
-                  {c.nombre}
-                </h3>
+                <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-white">{c.nombre}</h3>
                 <p className="mt-1.5 text-sm text-white/50">{c.descripcion}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-[#5badde]">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-[#00d4cc]">
                   Ver modelos
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -176,7 +155,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── Garantías ────────────────────────────────────────────────── */}
       <section className="reveal px-6 py-16 lg:px-12">
         <div className="mx-auto max-w-[1400px] rounded-2xl border border-white/[0.07] bg-white/[0.02] p-8 sm:p-12">
           <div className="grid gap-8 sm:grid-cols-3">
@@ -184,8 +162,7 @@ export default async function Home() {
               {
                 icon: ShieldCheck,
                 titulo: `${site.garantiaMeses} meses de garantía`,
-                texto:
-                  "Si falla por fabricación, la retiramos y la reponemos. Sin discusión.",
+                texto: "Si falla por fabricación, la retiramos y la reponemos. Sin discusión.",
               },
               {
                 icon: Truck,
@@ -195,19 +172,14 @@ export default async function Home() {
               {
                 icon: Sparkles,
                 titulo: "10 días para arrepentirte",
-                texto:
-                  "Si no te gustó cómo se ve en tu casa, la cambias o la devuelves.",
+                texto: "Si no te gustó cómo se ve en tu casa, la cambias o la devuelves.",
               },
             ].map((g) => (
               <div key={g.titulo} className="flex gap-4">
-                <g.icon className="h-5 w-5 shrink-0 text-[#5badde]" />
+                <g.icon className="h-5 w-5 shrink-0 text-[#00d4cc]" />
                 <div>
-                  <h3 className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white">
-                    {g.titulo}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/55">
-                    {g.texto}
-                  </p>
+                  <h3 className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white">{g.titulo}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/55">{g.texto}</p>
                 </div>
               </div>
             ))}
@@ -215,45 +187,30 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── Dudas frecuentes ─────────────────────────────────────────── */}
       <section className="reveal px-6 py-16 lg:px-12">
         <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Las dudas de siempre
-            </h2>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">Las dudas de siempre</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/55">
-              Si te queda otra, escríbenos por WhatsApp y te respondemos el
-              mismo día.
+              Si te queda otra, escríbenos por WhatsApp y te respondemos el mismo día.
             </p>
-            <CtaButton
-              href="/ayuda"
-              variant="secondary"
-              size="sm"
-              className="mt-6"
-              arrow
-            >
+            <CtaButton href="/ayuda" variant="secondary" size="sm" className="mt-6" arrow>
               Ver todas las preguntas
             </CtaButton>
           </div>
           <dl className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
             {faq.slice(0, 4).map((f) => (
               <div key={f.pregunta} className="py-5">
-                <dt className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white">
-                  {f.pregunta}
-                </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-white/55">
-                  {f.respuesta}
-                </dd>
+                <dt className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white">{f.pregunta}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-white/55">{f.respuesta}</dd>
               </div>
             ))}
           </dl>
         </div>
       </section>
 
-      {/* ── Cierre ───────────────────────────────────────────────────── */}
       <section className="reveal px-6 py-16 lg:px-12">
-        <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-2xl border border-[#5badde]/20 p-10 text-center sm:p-16">
+        <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-2xl border border-[#00d4cc]/20 p-10 text-center sm:p-16">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
@@ -263,12 +220,9 @@ export default async function Home() {
             }}
           />
           <div className="relative">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Elige la tuya y la despachamos esta semana
-            </h2>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">Elige la tuya y la despachamos esta semana</h2>
             <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/55">
-              Pagas con tarjeta, Webpay o transferencia. Te llega la boleta al
-              correo junto con el seguimiento del envío.
+              Pagas con tarjeta, Webpay o transferencia. Te llega la boleta al correo junto con el seguimiento del envío.
             </p>
             <CtaButton href="/tienda" size="lg" className="mt-8" arrow>
               Ver las lámparas
