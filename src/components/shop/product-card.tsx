@@ -18,16 +18,16 @@ export function ProductCard({
 
   const esCities = ["tokyo", "copenhagen", "zurich"].includes(producto.slug)
 
-  // Las fotos de Cities tienen márgenes internos distintos. Tokyo funciona
-  // como referencia. Copenhagen se corrige por posición y Zurich además recibe
-  // más escala para que la lámpara ocupe visualmente un tamaño equivalente.
+  // Cada foto tiene una composición distinta. Tokyo funciona como referencia;
+  // Copenhagen y Zurich reciben una corrección leve de escala y posición para
+  // que las lámparas se vean del mismo tamaño visual y apoyadas en la misma línea.
   const encuadreCities: Record<
     string,
-    { top: string; bottom: string; translateY: string }
+    { scale: number; objectPosition: string }
   > = {
-    tokyo: { top: "0%", bottom: "0%", translateY: "0%" },
-    copenhagen: { top: "-12%", bottom: "-12%", translateY: "10%" },
-    zurich: { top: "-18%", bottom: "-18%", translateY: "12%" },
+    tokyo: { scale: 1, objectPosition: "center 52%" },
+    copenhagen: { scale: 1.03, objectPosition: "center 53%" },
+    zurich: { scale: 1.12, objectPosition: "center 54%" },
   }
 
   return (
@@ -38,17 +38,19 @@ export function ProductCard({
       <div className="relative aspect-[4/5] overflow-hidden">
         {esCities && producto.imagenes[0] ? (
           <div
-            className="absolute inset-x-0 overflow-hidden"
+            className="absolute inset-0 overflow-hidden"
             style={{
-              top: encuadreCities[producto.slug].top,
-              bottom: encuadreCities[producto.slug].bottom,
-              transform: `translateY(${encuadreCities[producto.slug].translateY})`,
+              transform: `scale(${encuadreCities[producto.slug].scale})`,
+              transformOrigin: "center center",
             }}
           >
             <img
               src={producto.imagenes[0].src}
               alt={producto.imagenes[0].alt}
-              className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+              style={{
+                objectPosition: encuadreCities[producto.slug].objectPosition,
+              }}
               loading={priority ? "eager" : "lazy"}
             />
           </div>
