@@ -179,7 +179,7 @@ export default async function FichaProducto({
             <ul className="mt-6 flex flex-col gap-2.5">
               {producto.caracteristicas.map((c) => (
                 <li key={c} className="flex gap-2.5 text-sm text-white/60">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb454]" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#5badde]" />
                   {c}
                 </li>
               ))}

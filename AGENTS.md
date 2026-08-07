@@ -48,8 +48,14 @@ Hereda de thelab.solutions y **no se desvía de eso**:
 
 - Fondo `#0a0a0a`, superficies `#141414` / `#1a1a1a`, borde `#2a2a2a`.
 - Títulos en Montserrat (600/700), texto en DM Sans (300/400/500).
-- La diferencia con la marca madre es un solo token: el acento es ámbar
-  cálido `#ffb454` en vez del teal `#00d4cc` de The Lab.
+- La diferencia con la marca madre es un solo token: el acento es el
+  celeste `#5badde` del logo de The Lamp, en vez del teal `#00d4cc` de
+  The Lab.
+- **No mezclar el celeste con los cálidos.** El celeste es interfaz
+  (botones, links, foco). Los ámbar del fondo, del hero y del marcador de
+  producto representan luz de lámpara encendida y no se usan para
+  controles. `--warning` (#ffb454) es semántico: poco stock y pago
+  pendiente.
 
 # Reglas de trabajo
 

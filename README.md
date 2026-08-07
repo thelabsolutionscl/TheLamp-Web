@@ -3,8 +3,9 @@
 Tienda online de **The Lamp**, la submarca de lámparas de The Lab Solutions.
 
 Misma línea gráfica que thelab.solutions (negro `#0a0a0a`, Montserrat +
-DM Sans) con un solo cambio: el acento es ámbar `#ffb454` en vez del teal de
-la marca madre.
+DM Sans) con un solo cambio: el acento es el celeste `#5badde` del logo, en
+vez del teal de la marca madre. Los halos de luz del fondo se quedan cálidos
+a propósito: representan luz de lámpara, no color de marca.
 
 - **Stack:** Next.js 16 + React 19 + Tailwind 4, deploy en Cloudflare Workers
   vía `@opennextjs/cloudflare`.
@@ -82,10 +83,14 @@ Otros archivos de datos:
 
 ## 3. Poner el logo
 
-El sitio funciona hoy con un logotipo tipográfico dibujado por código, para
-no mostrar una imagen rota mientras no está el archivo definitivo.
+Hoy el sitio dibuja la ampolleta del logo en vectores y pone **THE LAMP** al
+lado en Montserrat. Se hizo así porque el logo original es apilado (THE
+arriba, LAMP abajo) y en la barra superior, a 22 px de alto, cada línea
+quedaría en 9 px: ilegible.
 
-1. Guarda el logo como **`public/logo.png`** (PNG con fondo transparente,
+Si consigues una **versión horizontal de una sola línea**:
+
+1. Guárdala como **`public/logo.png`** (PNG con fondo transparente,
    1200 px de ancho o más).
 2. Abre `src/components/layout/Logo.tsx`.
 3. Cambia la línea `const LOGO_SRC = ""` por `const LOGO_SRC = "/logo.png"`.

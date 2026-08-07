@@ -55,7 +55,7 @@ export default async function Tienda({
             className={cn(
               "rounded-full border px-4 py-2 text-xs transition-all",
               !filtro
-                ? "border-[#ffb454] bg-[#ffb454]/10 text-white"
+                ? "border-[#5badde] bg-[#5badde]/10 text-white"
                 : "border-white/[0.12] text-white/60 hover:border-white/25 hover:text-white"
             )}
           >
@@ -69,7 +69,7 @@ export default async function Tienda({
               className={cn(
                 "rounded-full border px-4 py-2 text-xs transition-all",
                 filtro === c.id
-                  ? "border-[#ffb454] bg-[#ffb454]/10 text-white"
+                  ? "border-[#5badde] bg-[#5badde]/10 text-white"
                   : "border-white/[0.12] text-white/60 hover:border-white/25 hover:text-white"
               )}
             >
@@ -94,7 +94,7 @@ export default async function Tienda({
             Todavía no hay modelos en esta colección.{" "}
             <Link
               href="/tienda"
-              className="text-[#ffb454] underline underline-offset-4"
+              className="text-[#5badde] underline underline-offset-4"
             >
               Ver todas las lámparas
             </Link>

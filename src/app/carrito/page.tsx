@@ -72,7 +72,7 @@ export default function Carrito() {
                 <div className="flex min-w-0 flex-1 flex-col gap-1">
                   <Link
                     href={`/producto/${l.slug}`}
-                    className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white transition-colors hover:text-[#ffb454]"
+                    className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white transition-colors hover:text-[#5badde]"
                   >
                     {l.producto.nombre}
                   </Link>
@@ -154,7 +154,7 @@ export default function Carrito() {
             </dl>
 
             {faltaParaDespachoGratis > 0 ? (
-              <p className="mt-4 rounded-lg bg-[#ffb454]/[0.08] px-3.5 py-3 text-xs leading-relaxed text-[#ffb454]">
+              <p className="mt-4 rounded-lg bg-[#5badde]/[0.08] px-3.5 py-3 text-xs leading-relaxed text-[#5badde]">
                 Te faltan {clp(faltaParaDespachoGratis)} para el despacho
                 liberado.
               </p>

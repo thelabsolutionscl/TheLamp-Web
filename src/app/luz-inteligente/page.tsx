@@ -56,7 +56,7 @@ export default function LuzInteligente() {
     <div className="px-6 py-14 lg:px-12 lg:py-20">
       <div className="mx-auto max-w-[1400px]">
         <header className="max-w-2xl">
-          <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#ffb454]">
+          <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#5badde]">
             Domótica sin complicaciones
           </span>
           <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
@@ -77,7 +77,7 @@ export default function LuzInteligente() {
                 key={p.titulo}
                 className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6"
               >
-                <p.icono className="h-5 w-5 text-[#ffb454]" />
+                <p.icono className="h-5 w-5 text-[#5badde]" />
                 <h3 className="mt-4 font-[family-name:var(--font-heading)] text-base font-semibold text-white">
                   {p.titulo}
                 </h3>
@@ -97,7 +97,7 @@ export default function LuzInteligente() {
                 key={c.titulo}
                 className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6"
               >
-                <c.icono className="h-5 w-5 text-[#ffb454]" />
+                <c.icono className="h-5 w-5 text-[#5badde]" />
                 <h3 className="mt-4 font-[family-name:var(--font-heading)] text-base font-semibold text-white">
                   {c.titulo}
                 </h3>

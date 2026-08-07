@@ -16,7 +16,7 @@ export function SiteBackground() {
         className="absolute -inset-[64px] opacity-[0.55]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,180,84,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,180,84,0.035) 1px, transparent 1px)",
+            "linear-gradient(rgba(91,173,222,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(91,173,222,0.035) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           animation: "grid-drift 24s linear infinite",
         }}

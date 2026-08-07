@@ -137,7 +137,7 @@ export function Footer() {
               href={site.empresa.matrizUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/55 transition-colors hover:text-[#ffb454]"
+              className="text-white/55 transition-colors hover:text-[#5badde]"
             >
               {site.empresa.matriz}
             </a>

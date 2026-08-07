@@ -127,7 +127,7 @@ export default function RootLayout({
         <SiteBackground />
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#ffb454] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[#0a0a0a]"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#5badde] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[#0a0a0a]"
         >
           Saltar al contenido
         </a>

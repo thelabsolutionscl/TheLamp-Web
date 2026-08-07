@@ -141,7 +141,7 @@ export default function Terminos() {
               El tratamiento de tus datos se rige por nuestra{" "}
               <Link
                 href="/privacidad"
-                className="text-[#ffb454] underline underline-offset-4"
+                className="text-[#5badde] underline underline-offset-4"
               >
                 política de privacidad
               </Link>

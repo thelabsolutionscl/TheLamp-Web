@@ -33,7 +33,7 @@ function BotonCarrito({ onNavigate }: { onNavigate?: () => void }) {
     >
       <ShoppingBag className="h-[18px] w-[18px]" />
       {listo && unidades > 0 && (
-        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#ffb454] px-1 text-[10px] font-semibold tabular text-[#0a0a0a]">
+        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#5badde] px-1 text-[10px] font-semibold tabular text-[#0a0a0a]">
           {unidades}
         </span>
       )}

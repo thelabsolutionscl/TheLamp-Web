@@ -10,7 +10,7 @@ import { whatsappUrl } from "@/lib/whatsapp"
 const inicial: EstadoContacto = { estado: "inicial" }
 
 const campo =
-  "w-full rounded-lg border border-white/[0.12] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 transition-colors focus:border-[#ffb454]/60 focus:outline-none focus:ring-1 focus:ring-[#ffb454]/40"
+  "w-full rounded-lg border border-white/[0.12] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 transition-colors focus:border-[#5badde]/60 focus:outline-none focus:ring-1 focus:ring-[#5badde]/40"
 const etiqueta = "mb-1.5 block text-xs font-medium text-white/60"
 
 export default function Contacto() {
@@ -33,22 +33,22 @@ export default function Contacto() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 text-white/65 transition-colors hover:text-white"
             >
-              <MessageCircle className="h-4 w-4 shrink-0 text-[#ffb454]" />
+              <MessageCircle className="h-4 w-4 shrink-0 text-[#5badde]" />
               WhatsApp — la vía más rápida
             </a>
             <a
               href={`mailto:${site.email}`}
               className="inline-flex items-center gap-3 text-white/65 transition-colors hover:text-white"
             >
-              <Mail className="h-4 w-4 shrink-0 text-[#ffb454]" />
+              <Mail className="h-4 w-4 shrink-0 text-[#5badde]" />
               {site.email}
             </a>
             <span className="inline-flex items-start gap-3 text-white/55">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb454]" />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#5badde]" />
               {site.direccion.calle}, {site.direccion.comuna}, Santiago
             </span>
             <span className="inline-flex items-center gap-3 text-white/55">
-              <Clock className="h-4 w-4 shrink-0 text-[#ffb454]" />
+              <Clock className="h-4 w-4 shrink-0 text-[#5badde]" />
               {site.horario}
             </span>
           </div>

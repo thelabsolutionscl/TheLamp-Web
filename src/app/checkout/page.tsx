@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils"
 const inicial: EstadoCheckout = { estado: "inicial" }
 
 const campo =
-  "w-full rounded-lg border border-white/[0.12] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 transition-colors focus:border-[#ffb454]/60 focus:outline-none focus:ring-1 focus:ring-[#ffb454]/40"
+  "w-full rounded-lg border border-white/[0.12] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 transition-colors focus:border-[#5badde]/60 focus:outline-none focus:ring-1 focus:ring-[#5badde]/40"
 const etiqueta = "mb-1.5 block text-xs font-medium text-white/60"
 
 export default function Checkout() {
@@ -156,7 +156,7 @@ export default function Checkout() {
                   type="checkbox"
                   checked={retiro}
                   onChange={(e) => setRetiro(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 accent-[#ffb454]"
+                  className="mt-0.5 h-4 w-4 accent-[#5badde]"
                 />
                 <span>
                   <span className="block text-sm text-white">

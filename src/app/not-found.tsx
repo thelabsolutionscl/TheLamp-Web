@@ -4,7 +4,7 @@ export default function NoEncontrado() {
   return (
     <div className="px-6 py-24 lg:px-12">
       <div className="mx-auto max-w-md text-center">
-        <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.2em] text-[#ffb454]">
+        <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.2em] text-[#5badde]">
           Error 404
         </p>
         <h1 className="mt-4 text-3xl font-bold text-white">

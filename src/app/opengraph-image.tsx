@@ -22,21 +22,43 @@ export default function Og() {
           padding: "0 90px",
           background: "#0a0a0a",
           backgroundImage:
+            // Cálido: es el halo de una lámpara encendida, no el acento de marca.
             "radial-gradient(ellipse 55% 65% at 50% 0%, rgba(255,180,84,0.20) 0%, transparent 70%)",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        {/* Mismo logotipo que la barra del sitio: ampolleta + THE LAMP.
+            Va con cajas y no con SVG porque el motor de next/og renderiza
+            SVG de forma parcial. */}
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div
             style={{
-              width: 20,
-              height: 20,
-              borderRadius: 999,
-              background: "#ffb454",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 4,
             }}
-          />
-          <div style={{ display: "flex", fontSize: 44, fontWeight: 700, color: "#fff" }}>
-            The<span style={{ color: "#ffb454" }}>Lamp</span>
+          >
+            <div
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: 999,
+                border: "5px solid #ffffff",
+              }}
+            />
+            <div style={{ width: 20, height: 7, borderRadius: 2, background: "#5badde" }} />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 46,
+              fontWeight: 700,
+              color: "#ffffff",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            THE LAMP
           </div>
         </div>
 

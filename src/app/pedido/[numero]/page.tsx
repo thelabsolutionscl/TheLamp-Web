@@ -30,6 +30,7 @@ const presentacion: Record<
   },
   pendiente: {
     icono: Clock,
+    // Ámbar de aviso, no el acento de marca: acá comunica "espera".
     color: "#ffb454",
     titulo: "Estamos confirmando tu pago",
     texto:

@@ -41,7 +41,7 @@ export default async function Home() {
         />
         <div className="relative mx-auto max-w-[1400px]">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#ffb454]/25 bg-[#ffb454]/[0.07] px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#ffb454]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#5badde]/25 bg-[#5badde]/[0.07] px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#5badde]">
               <Sparkles className="h-3 w-3" />
               Iluminación de diseño · Chile
             </span>
@@ -103,7 +103,7 @@ export default async function Home() {
               key={b.titulo}
               className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6"
             >
-              <b.icon className="h-5 w-5 text-[#ffb454]" />
+              <b.icon className="h-5 w-5 text-[#5badde]" />
               <h2 className="mt-4 font-[family-name:var(--font-heading)] text-base font-semibold text-white">
                 {b.titulo}
               </h2>
@@ -129,7 +129,7 @@ export default async function Home() {
             </div>
             <Link
               href="/tienda"
-              className="group inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-[#ffb454]"
+              className="group inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-[#5badde]"
             >
               Ver todas
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -160,13 +160,13 @@ export default async function Home() {
               <Link
                 key={c.id}
                 href={`/tienda?coleccion=${c.id}`}
-                className="group rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all hover:border-[#ffb454]/25 hover:bg-white/[0.04]"
+                className="group rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all hover:border-[#5badde]/25 hover:bg-white/[0.04]"
               >
                 <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-white">
                   {c.nombre}
                 </h3>
                 <p className="mt-1.5 text-sm text-white/50">{c.descripcion}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-[#ffb454]">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs text-[#5badde]">
                   Ver modelos
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -200,7 +200,7 @@ export default async function Home() {
               },
             ].map((g) => (
               <div key={g.titulo} className="flex gap-4">
-                <g.icon className="h-5 w-5 shrink-0 text-[#ffb454]" />
+                <g.icon className="h-5 w-5 shrink-0 text-[#5badde]" />
                 <div>
                   <h3 className="font-[family-name:var(--font-heading)] text-sm font-semibold text-white">
                     {g.titulo}
@@ -253,7 +253,7 @@ export default async function Home() {
 
       {/* ── Cierre ───────────────────────────────────────────────────── */}
       <section className="reveal px-6 py-16 lg:px-12">
-        <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-2xl border border-[#ffb454]/20 p-10 text-center sm:p-16">
+        <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-2xl border border-[#5badde]/20 p-10 text-center sm:p-16">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
