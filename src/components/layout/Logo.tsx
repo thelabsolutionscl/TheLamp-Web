@@ -1,32 +1,12 @@
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 
-/**
- * ─── SI QUIERES USAR EL ARCHIVO DEL LOGO EN VEZ DE ESTO ─────────────────
- * Lo que se dibuja acá es la ampolleta del logo redibujada en vectores, con
- * "THE LAMP" al lado en Montserrat. Se hizo así porque el logo original es
- * apilado (THE arriba, LAMP abajo) y en la barra superior, a 22 px de alto,
- * cada línea quedaría en 9 px: ilegible.
- *
- * Si consigues una versión horizontal de una sola línea:
- * 1. Guárdala en `public/logo.png` (PNG con fondo transparente, 1200 px de
- *    ancho o más).
- * 2. Cambia `LOGO_SRC` de "" a "/logo.png".
- * 3. Ajusta `LOGO_RATIO` al ancho ÷ alto real del archivo. Si mide
- *    1200 × 260, el valor es 1200 / 260 = 4.6.
- * Se actualiza de una vez en el header, el menú móvil y el footer.
- * ───────────────────────────────────────────────────────────────────────── */
 const LOGO_SRC = ""
 const LOGO_RATIO = 4.6
 
-/** El celeste del casquillo, único color del logo. */
-const CELESTE = "#5badde"
+/** Turquesa oficial de The Lamp, sincronizado con la app. */
+const TURQUESA = "#00d4cc"
 
-/**
- * La ampolleta del logo: vidrio en trazo blanco, casquillo celeste, y el
- * conjunto inclinado como en el original. Se dibuja upright y se rota, que es
- * mucho más fácil de mantener que calcular los puntos ya inclinados.
- */
 function Ampolleta({ alto }: { alto: number }) {
   return (
     <svg
@@ -37,7 +17,6 @@ function Ampolleta({ alto }: { alto: number }) {
       className="shrink-0 overflow-visible"
     >
       <g transform="rotate(34 12 12)">
-        {/* Vidrio */}
         <path
           d="M12 2.6a6.2 6.2 0 0 1 3.7 11.2v1.1H8.3v-1.1A6.2 6.2 0 0 1 12 2.6Z"
           fill="none"
@@ -45,7 +24,6 @@ function Ampolleta({ alto }: { alto: number }) {
           strokeWidth="1.7"
           strokeLinejoin="round"
         />
-        {/* Reflejo interior: el trazo diagonal del logo */}
         <path
           d="M10.1 11.6 14 6.9"
           fill="none"
@@ -53,9 +31,8 @@ function Ampolleta({ alto }: { alto: number }) {
           strokeWidth="1.5"
           strokeLinecap="round"
         />
-        {/* Casquillo */}
-        <rect x="8.3" y="16.1" width="7.4" height="2.5" rx="0.5" fill={CELESTE} />
-        <rect x="9.3" y="19.2" width="5.4" height="2.2" rx="0.5" fill={CELESTE} />
+        <rect x="8.3" y="16.1" width="7.4" height="2.5" rx="0.5" fill={TURQUESA} />
+        <rect x="9.3" y="19.2" width="5.4" height="2.2" rx="0.5" fill={TURQUESA} />
       </g>
     </svg>
   )
@@ -63,7 +40,6 @@ function Ampolleta({ alto }: { alto: number }) {
 
 export function Logo({
   className,
-  /** Alto en píxeles del conjunto. */
   alto = 24,
 }: {
   className?: string
