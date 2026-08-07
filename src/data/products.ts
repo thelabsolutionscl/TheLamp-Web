@@ -73,6 +73,40 @@ export type Producto = {
 
 export const productos: Producto[] = [
   {
+    slug: "tokyo",
+    nombre: "Tokyo",
+    tagline: "Luz inteligente envuelta en movimiento",
+    descripcion:
+      "Tokyo transforma la luz en una pieza escultórica. Su silueta en torsión genera profundidad y movimiento incluso cuando está apagada, mientras su iluminación RGB permite cambiar la atmósfera desde la app The Lamp o mediante comandos de voz con Alexa y Google Home.",
+    coleccion: "mesa",
+    precio: 39990,
+    stock: 99,
+    destacado: true,
+    domotica: true,
+    imagenes: [],
+    medidas: { alto: 22, ancho: 17, profundidad: 17 },
+    pesoKg: 0.2,
+    colores: ["Blanco"],
+    caracteristicas: [
+      "Bombilla RGB inteligente incluida",
+      "Control desde la app The Lamp",
+      "Compatible con Alexa y Google Home",
+      "Tres tamaños disponibles: S, M y L",
+      "Fabricación bajo pedido",
+    ],
+    especificaciones: [
+      { label: "Colección", valor: "thelamp · Cities" },
+      { label: "Tamaño S", valor: "14 × 14 × 18 cm · $39.990 IVA incluido" },
+      { label: "Tamaño M", valor: "17 × 17 × 22 cm · $44.990 IVA incluido" },
+      { label: "Tamaño L", valor: "21 × 21 × 27 cm · $59.990 IVA incluido" },
+      { label: "Pack 2 × M", valor: "$80.000 IVA incluido" },
+      { label: "Iluminación", valor: "RGB inteligente" },
+      { label: "Control", valor: "App The Lamp" },
+      { label: "Asistentes", valor: "Alexa y Google Home" },
+      { label: "Peso aprox. M", valor: "200 g con soquete y bombilla" },
+    ],
+  },
+  {
     slug: "aura",
     nombre: "Aura",
     tagline: "Luz difusa para el velador",
