@@ -16,15 +16,19 @@ export function ProductCard({
   const agotado = disponible <= 0
   const enOferta = producto.precioAntes && producto.precioAntes > producto.precio
 
-  // Cada foto tiene una composición distinta. Ajustamos el punto vertical de
-  // recorte para que la base de Tokyo, Copenhagen y Zurich caiga en la misma
-  // línea visual dentro de la grilla de la tienda.
-  const posicionFotoPorSlug: Record<string, string> = {
-    tokyo: "object-[center_44%]",
-    copenhagen: "object-[center_42%]",
-    zurich: "object-[center_50%]",
+  const esCities = ["tokyo", "copenhagen", "zurich"].includes(producto.slug)
+
+  // Las fotos de Cities tienen márgenes internos distintos. En vez de intentar
+  // compensarlos solo con object-position, desplazamos el lienzo de cada foto
+  // dentro del mismo marco. Tokyo funciona como línea de referencia.
+  const encuadreCities: Record<
+    string,
+    { top: string; bottom: string; translateY: string }
+  > = {
+    tokyo: { top: "0%", bottom: "0%", translateY: "0%" },
+    copenhagen: { top: "-12%", bottom: "-12%", translateY: "10%" },
+    zurich: { top: "-9%", bottom: "-9%", translateY: "7%" },
   }
-  const posicionFoto = posicionFotoPorSlug[producto.slug] ?? "object-center"
 
   return (
     <Link
@@ -32,12 +36,22 @@ export function ProductCard({
       className="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111] transition-all duration-300 hover:-translate-y-1 hover:border-[#5badde]/25 hover:shadow-[0_20px_50px_-20px_rgba(91,173,222,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5badde]/50 motion-reduce:hover:translate-y-0"
     >
       <div className="relative aspect-[4/5] overflow-hidden">
-        {producto.slug === "copenhagen" ? (
-          <img
-            src="https://raw.githubusercontent.com/thelabsolutionscl/TheLamp-Web/main/Copenhagen1.jpeg"
-            alt="The Lamp Copenhagen · ambiente azul"
-            className="absolute inset-0 h-full w-full object-cover object-[center_42%] transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
-          />
+        {esCities && producto.imagenes[0] ? (
+          <div
+            className="absolute inset-x-0 overflow-hidden"
+            style={{
+              top: encuadreCities[producto.slug].top,
+              bottom: encuadreCities[producto.slug].bottom,
+              transform: `translateY(${encuadreCities[producto.slug].translateY})`,
+            }}
+          >
+            <img
+              src={producto.imagenes[0].src}
+              alt={producto.imagenes[0].alt}
+              className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+              loading={priority ? "eager" : "lazy"}
+            />
+          </div>
         ) : (
           <ProductImage
             imagenes={producto.imagenes}
@@ -45,7 +59,7 @@ export function ProductCard({
             coleccion={producto.coleccion}
             priority={priority}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={`${posicionFoto} transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100`}
+            className="object-center transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
           />
         )}
 
